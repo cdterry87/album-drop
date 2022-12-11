@@ -12,10 +12,20 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                sans: ['Alata', ...defaultTheme.fontFamily.sans],
             },
         },
     },
 
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), require("daisyui")],
+    // Enabled plugins
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/typography'),
+        require("daisyui")
+    ],
+
+    // DaisyUI config
+    daisyui: {
+        themes: ['dark'],
+    },
 };

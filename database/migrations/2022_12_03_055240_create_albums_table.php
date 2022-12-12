@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('albums', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->index();
-            $table->string('album_id');
+            $table->string('spotify_album_id');
             $table->string('name');
+            $table->string('image');
             $table->date('release_date');
             $table->timestamps();
         });

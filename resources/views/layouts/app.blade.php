@@ -158,7 +158,9 @@
                     </label>
                 </header>
 
-                {{ $slot }}
+                <div class="px-4">
+                    {{ $slot }}
+                </div>
             </main>
         </div>
         <div class="drawer-side">

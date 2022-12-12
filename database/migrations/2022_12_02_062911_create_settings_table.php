@@ -20,7 +20,6 @@ return new class extends Migration
             $table->boolean('notify_albums')->default(false);
             $table->boolean('notify_songs')->default(false);
             $table->boolean('notify_recommendations')->default(false);
-            $table->boolean('notify_frequency')->default('M'); // Weekly, Monthly, Yearly
             $table->timestamps();
         });
     }

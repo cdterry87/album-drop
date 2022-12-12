@@ -160,7 +160,6 @@
 
                 {{ $slot }}
             </main>
-
         </div>
         <div class="drawer-side">
             <label
@@ -168,7 +167,9 @@
                 class="drawer-overlay"
             ></label>
             <div class="menu p-4 w-80 bg-base-200 text-base-content">
-                <h1 class="text-3xl font-bold">{{ env('APP_NAME') }}</h1>
+                <a href="{{ route('home') }}">
+                    <h1 class="text-3xl font-bold">{{ env('APP_NAME') }}</h1>
+                </a>
                 <label
                     for="sidebar"
                     class="drawer-overlay cursor-pointer absolute top-6 right-6 lg:hidden"

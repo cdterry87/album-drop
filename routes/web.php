@@ -21,7 +21,7 @@ use App\Http\Livewire\TrackedArtists;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::middleware([
     'auth:sanctum',
@@ -38,8 +38,9 @@ Route::middleware([
     /**
      * Dashboard
      *
-     * - List latest albums from saved artists
+     * - Show a few latest albums from saved artists
      * - Show a few recommended artists
+     * - Show a few of the user's notifications
      */
     Route::get('dashboard', Dashboard::class)
         ->name('dashboard');
@@ -66,5 +67,11 @@ Route::middleware([
      * Recent Releases
      */
     Route::get('recent-releases', RecentReleases::class)
+        ->name('recent-releases');
+
+    /**
+     * Notifications
+     */
+    Route::get('notifications', RecentReleases::class)
         ->name('recent-releases');
 });

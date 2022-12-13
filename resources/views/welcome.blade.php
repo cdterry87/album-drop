@@ -32,7 +32,7 @@
                 <p class="mb-12">Track artists and we'll let you know when their next album drops!</p>
                 <a
                     role="button"
-                    class="btn btn-accent"
+                    class="btn btn-primary"
                     href="{{ route('dashboard') }}"
                 >Get Started!
                 </a>

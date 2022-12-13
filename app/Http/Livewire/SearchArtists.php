@@ -11,6 +11,11 @@ class SearchArtists extends Component
     public $results;
     public $isSearchComplete = false;
 
+    public $messages = [
+        'search.required' => 'You must enter a search term.',
+        'search.min' => 'Your search term must be at least 2 characters.',
+    ];
+
     public function render()
     {
         return view('livewire.search-artists');
@@ -18,9 +23,13 @@ class SearchArtists extends Component
 
     public function search()
     {
+        $this->validate([
+            'search' => 'required|min:2',
+        ]);
+
         // Use the Spotify facade to search for artists
         $results = SpotifyFacade::searchArtists($this->search)
-            ->limit(6)
+            ->limit(12)
             ->get();
 
         // Set the results to the artist items
@@ -30,11 +39,10 @@ class SearchArtists extends Component
         $this->isSearchComplete = true;
     }
 
-    public function trackArtist($spotifyId)
+    public function clearSearch()
     {
-        // Use the Spotify facade to get the artist
-        $artist = SpotifyFacade::getArtist($spotifyId);
-
-        // Save artist to the artists table
+        $this->search = '';
+        $this->results = [];
+        $this->isSearchComplete = false;
     }
 }

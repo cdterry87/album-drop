@@ -76,7 +76,7 @@
                                             <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
                                         </svg>
                                     </a>
-                                    <ul class="p-2 bg-base-200">
+                                    <ul class="p-2 bg-base-300">
                                         <li>
                                             <a href="{{ route('profile.show') }}">
                                                 <svg
@@ -158,7 +158,7 @@
                     </label>
                 </header>
 
-                <div class="px-4">
+                <div class="px-8">
                     {{ $slot }}
                 </div>
             </main>
@@ -168,7 +168,7 @@
                 for="sidebar"
                 class="drawer-overlay"
             ></label>
-            <div class="menu p-4 w-80 bg-base-200 text-base-content">
+            <div class="menu p-4 w-80 bg-base-300 text-base-content">
                 <a href="{{ route('home') }}">
                     <h1 class="text-3xl font-bold">{{ env('APP_NAME') }}</h1>
                 </a>

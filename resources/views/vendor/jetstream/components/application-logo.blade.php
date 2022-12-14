@@ -1,1 +1,5 @@
-<h2 class="font-bold text-2xl">{{ env('APP_NAME') }}</h2>
+<h1 {{ $attributes->merge([
+    'class' => 'font-bold text-5xl',
+]) }}>
+    {{ env('APP_NAME') }}
+</h1>

@@ -28,8 +28,10 @@
         <div class="hero-overlay bg-opacity-80"></div>
         <div class="hero-content text-center text-white">
             <div class="max-w-lg">
-                <h1 class="mb-5 text-5xl font-bold">{{ env('APP_NAME') }}</h1>
-                <p class="mb-12">Track artists and we'll let you know when their next album drops!</p>
+                <x-jet-application-logo />
+                <p class="mt-3 mb-12 max-w-sm">
+                    Track your favorite artists and we'll let you know when their next album drops!
+                </p>
                 <a
                     role="button"
                     class="btn btn-primary"
@@ -53,6 +55,4 @@
             </div>
         </div>
     </div>
-
-
 </x-guest-layout>

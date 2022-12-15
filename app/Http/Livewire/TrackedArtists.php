@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Artist;
 use Livewire\Component;
+use App\Models\UserArtist;
 
 class TrackedArtists extends Component
 {
@@ -13,11 +13,13 @@ class TrackedArtists extends Component
 
     public function render()
     {
-        $results = Artist::where('user_id', auth()->id())
+        $results = UserArtist::select('artists.name', 'artists.image', 'artists.url', 'artists.spotify_artist_id')
+            ->where('user_id', auth()->id())
+            ->join('artists', 'artists.id', '=', 'users_artists.artist_id')
             ->when(strlen($this->search) > 2, function ($query) {
-                $query->where('name', 'like', "%{$this->search}%");
+                $query->where('artists.name', 'like', "%{$this->search}%");
             })
-            ->orderBy('name')
+            ->orderBy('artists.name')
             ->get();
 
         return view('livewire.tracked-artists', [

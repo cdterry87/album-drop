@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('syncs', function (Blueprint $table) {
+        Schema::create('users_artists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->index();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('artist_id')->constrained('artists')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('syncs');
+        Schema::dropIfExists('users_artists');
     }
 };

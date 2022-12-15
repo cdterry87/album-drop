@@ -9,7 +9,7 @@
         <h2 class="card-title text-3xl">{{ $name }}</h2>
         <div class="card-actions justify-end">
             <a
-                href="https://open.spotify.com/artist/{{ $spotifyId }}"
+                href="{{ $url }}"
                 class="btn btn-spotify"
                 target="_blank"
             >

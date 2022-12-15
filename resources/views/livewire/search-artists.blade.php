@@ -68,6 +68,7 @@
                         <livewire:components.artist-card
                             :name="$result['name']"
                             :image="$result['images'][0]['url'] ?? null"
+                            :url="$result['external_urls']['spotify']"
                             :spotify-id="$result['id']"
                             wire:key="{{ $result['id'] }}"
                         />

@@ -4,10 +4,11 @@ namespace App\Http\Livewire\Components;
 
 use App\Models\Artist;
 use Livewire\Component;
+use App\Models\UserArtist;
 
 class ArtistCard extends Component
 {
-    public $name, $image, $genres, $spotifyId;
+    public $name, $image, $url, $spotifyId;
     public $isTracked = false;
 
     public function render()
@@ -18,16 +19,21 @@ class ArtistCard extends Component
     }
 
     /**
-     * Save artist to the user's tracked artists.
+     * Save artist and add it to user's tracked artists.
      */
     public function trackArtist()
     {
-        // If artist is not being tracked, create it
-        Artist::create([
-            'user_id' => auth()->id(),
+        // Save artist
+        $artist = Artist::updateOrCreate(['spotify_artist_id' => $this->spotifyId], [
             'name' => $this->name,
             'image' => $this->image,
-            'artist_id' => $this->spotifyId,
+            'url' => $this->url,
+        ]);
+
+        // Add artist to user's tracked artists
+        UserArtist::updateOrCreate([
+            'user_id' => auth()->id(),
+            'artist_id' => $artist->id,
         ]);
 
         $this->emit('refreshTrackedArtists');
@@ -39,7 +45,6 @@ class ArtistCard extends Component
     public function untrackArtist()
     {
         Artist::query()
-            ->where('user_id', auth()->id())
             ->where('artist_id', $this->spotifyId)
             ->delete();
 
@@ -47,19 +52,15 @@ class ArtistCard extends Component
     }
 
     /**
-     * @todo - when an artist is added or removed, we also need
-     *  to add/remove their genres from the user's genres list
-     * this will help us with the recommended artists feature
-     */
-
-    /**
      * Determine if the artist is already tracked by this user.
      */
     protected function determineIsTracked()
     {
         $this->isTracked = Artist::query()
-            ->where('user_id', auth()->id())
-            ->where('artist_id', $this->spotifyId)
+            ->where('spotify_artist_id', $this->spotifyId)
+            ->whereHas('userArtists', function ($query) {
+                $query->where('user_id', auth()->id());
+            })
             ->exists();
     }
 }

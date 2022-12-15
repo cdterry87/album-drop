@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('artists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->index();
             $table->string('spotify_artist_id');
             $table->string('name');
             $table->string('image');
+            $table->string('url');
             $table->timestamps();
         });
     }

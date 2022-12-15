@@ -19,8 +19,9 @@
                 <livewire:components.artist-card
                     :name="$result->name"
                     :image="$result->image"
-                    :spotify-id="$result->artist_id"
-                    wire:key="{{ $result->artist_id }}"
+                    :url="$result->url"
+                    :spotify-id="$result->spotify_artist_id"
+                    wire:key="{{ $result->spotify_artist_id }}"
                 />
             @endforeach
         </div>

@@ -193,7 +193,12 @@
                 </label>
                 <hr class=" mt-6 mb-4 border-gray-600">
                 <ul>
-                    <li><a href="{{ route('dashboard') }}"><svg
+                    <li>
+                        <a
+                            href="{{ route('dashboard') }}"
+                            class="{{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                        >
+                            <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
@@ -210,7 +215,11 @@
                             Dashboard
                         </a>
                     </li>
-                    <li><a href="{{ route('search-artists') }}">
+                    <li>
+                        <a
+                            href="{{ route('search-artists') }}"
+                            class="{{ request()->routeIs('search-artists') ? 'active' : '' }}"
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -225,8 +234,13 @@
                                     d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
                                 />
                             </svg>
-                            Search Artists</a></li>
-                    <li><a href="{{ route('tracked-artists') }}">
+                            Search Artists</a>
+                    </li>
+                    <li>
+                        <a
+                            href="{{ route('tracked-artists') }}"
+                            class="{{ request()->routeIs('tracked-artists') ? 'active' : '' }}"
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -245,7 +259,11 @@
                             Tracked Artists
                         </a>
                     </li>
-                    <li><a href="{{ route('recommended-artists') }}">
+                    <li>
+                        <a
+                            href="{{ route('recommended-artists') }}"
+                            class="{{ request()->routeIs('recommended-artists') ? 'active' : '' }}"
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -263,7 +281,11 @@
                             Recommended Artists
                         </a>
                     </li>
-                    <li><a href="{{ route('recent-releases') }}">
+                    <li>
+                        <a
+                            href="{{ route('recent-releases') }}"
+                            class="{{ request()->routeIs('recent-releases') ? 'active' : '' }}"
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"

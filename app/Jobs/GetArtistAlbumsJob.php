@@ -37,13 +37,13 @@ class GetArtistAlbumsJob implements ShouldQueue
     {
         // Get all (distinct) artists in the system
         $artists = Artist::distinct()
-            ->select('spotify_artist_id')
+            ->select('spotify_artist_id', 'name')
             ->orderBy('name', 'asc')
             ->get();
 
         // Get all albums for each artist
         foreach ($artists as $artist) {
-            $artistId = $artist->artist_id;
+            $artistId = $artist->spotify_artist_id;
 
             $artistAlbums = SpotifyFacade::artistAlbums($artistId)
                 ->includeGroups('album,single')
@@ -54,13 +54,22 @@ class GetArtistAlbumsJob implements ShouldQueue
             foreach ($albums as $album) {
                 $albumId = $album['id'];
 
+                // Format release date, if needed
+                $releaseDate = $album['release_date'];
+                if ($album['release_date_precision'] == 'year') {
+                    $releaseDate .= '-01-01';
+                }
+                if ($album['release_date_precision'] == 'month') {
+                    $releaseDate .= '-01';
+                }
+
                 // Update or create the album
-                $album = Album::updateOrCreate([
+                $newAlbum = Album::updateOrCreate([
                     'spotify_album_id' => $albumId,
                     'spotify_artist_id' => $artistId,
                 ], [
                     'name' => $album['name'],
-                    'release_date' => $album['release_date'],
+                    'release_date' => $releaseDate,
                     'url' => $album['external_urls']['spotify'],
                     'image' => $album['images'][0]['url'],
                     'type' => $album['type'],
@@ -68,15 +77,15 @@ class GetArtistAlbumsJob implements ShouldQueue
 
                 // Get all users who are tracking this artist
                 $usersTrackingArtist = UserArtist::select('user_id')
-                    ->where('spotify_artist_id', $artistId)
-                    ->with('users')
+                    ->join('artists', 'artists.id', '=', 'users_artists.artist_id')
+                    ->where('artists.spotify_artist_id', $artistId)
                     ->get();
 
                 // Add the album to the user
                 foreach ($usersTrackingArtist as $user) {
                     UserAlbum::updateOrCreate([
                         'user_id' => $user->user_id,
-                        'album_id' => $album->id,
+                        'album_id' => $newAlbum->id,
                     ]);
                 }
             }

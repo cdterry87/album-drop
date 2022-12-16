@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('country', 2)->default('US');
+            $table->boolean('subscribed')->default(true);
             $table->timestamps();
         });
     }

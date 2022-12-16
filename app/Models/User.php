@@ -58,4 +58,21 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function artists()
+    {
+        return $this->hasManyThrough(
+            Artist::class,
+            UserArtist::class,
+            'user_id',
+            'id',
+            'id',
+            'artist_id'
+        );
+    }
+
+    public function albums()
+    {
+        return $this->hasManyThrough(Album::class, UserAlbum::class, 'user_id', 'id', 'id', 'album_id');
+    }
 }

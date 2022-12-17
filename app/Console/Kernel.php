@@ -3,7 +3,7 @@
 namespace App\Console;
 
 use App\Jobs\GetArtistAlbumsJob;
-use App\Jobs\SendNewAlbumReleaseEmailJob;
+use App\Jobs\SendNewAlbumReleaseMailJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
          * Local testing
          * Run: sail artisan schedule:work
          */
-        // $schedule->job(new GetArtistAlbumsJob())->everyMinute();
-        $schedule->job(new SendNewAlbumReleaseEmailJob())->everyMinute();
+        $schedule->job(new GetArtistAlbumsJob())->everyMinute();
+        $schedule->job(new SendNewAlbumReleaseMailJob())->everyMinute();
     }
 
     /**

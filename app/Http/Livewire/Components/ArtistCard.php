@@ -45,7 +45,7 @@ class ArtistCard extends Component
     public function untrackArtist()
     {
         Artist::query()
-            ->where('artist_id', $this->spotifyId)
+            ->where('spotify_artist_id', $this->spotifyId)
             ->delete();
 
         $this->emit('refreshTrackedArtists');

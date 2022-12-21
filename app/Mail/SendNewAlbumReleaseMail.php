@@ -14,15 +14,16 @@ class SendNewAlbumReleaseMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $albums;
+    public $user, $albums;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($albums)
+    public function __construct($user, $albums)
     {
+        $this->user = $user;
         $this->albums = $albums;
     }
 
@@ -47,7 +48,7 @@ class SendNewAlbumReleaseMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.new-album-release',
+            markdown: 'mail.new-album-release',
         );
     }
 

@@ -27,7 +27,6 @@ class Kernel extends ConsoleKernel
          * Local testing
          * Run: sail artisan schedule:work
          */
-        $schedule->job(new GetArtistAlbumsJob())->everyMinute();
         $schedule->job(new SendNewAlbumReleaseMailJob())->everyMinute();
     }
 

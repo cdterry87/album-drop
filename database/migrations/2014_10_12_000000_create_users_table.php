@@ -22,6 +22,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->string('country', 2)->default('US');
             $table->boolean('subscribed')->default(true);
+            $table->string('unsubscribe_token')->unique();
             $table->timestamps();
         });
     }

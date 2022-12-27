@@ -8,6 +8,14 @@ class RecentReleases extends Component
 {
     public function render()
     {
-        return view('livewire.recent-releases');
+        $results = auth()->user()->albumReleaseMailLogs()
+            ->with('album', 'album.artist')
+            ->where('created_at', '>=', now()->subDays(30))
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('livewire.recent-releases', [
+            'results' => $results
+        ]);
     }
 }

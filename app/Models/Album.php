@@ -11,6 +11,7 @@ class Album extends Model
 
     protected $table = 'albums';
     protected $guarded = [];
+    protected $dates = ['release_date'];
 
     public function artist()
     {

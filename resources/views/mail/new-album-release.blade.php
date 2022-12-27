@@ -30,7 +30,7 @@ View On Spotify
 @endforeach
 
 <x-mail::subcopy>
-@copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
 </x-mail::subcopy>
 
 {{-- unsubscribe goes here --}}

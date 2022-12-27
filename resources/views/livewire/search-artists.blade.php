@@ -63,7 +63,7 @@
     <div class="text-center">
         @if ($isSearchComplete)
             @if ($results)
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 py-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     @foreach ($results as $result)
                         <livewire:components.artist-card
                             :name="$result['name']"

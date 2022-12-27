@@ -158,7 +158,7 @@
                     </label>
                 </header>
 
-                <div class="px-8">
+                <div class="px-8 pb-16">
                     {{ $slot }}
                 </div>
             </main>

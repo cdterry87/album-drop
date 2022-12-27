@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
          */
         // $schedule->job(new ArtistAlbumsJob())->everyMinute();
         // $schedule->job(new UserAlbumReleaseMailJob())->everyMinute();
-        // $schedule->job(new ArtistRelatedArtistJob())->everyMinute();
+        $schedule->job(new ArtistRelatedArtistJob())->everyMinute();
     }
 
     /**

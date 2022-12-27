@@ -4,9 +4,12 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\UserArtist;
+use Livewire\WithPagination;
 
 class TrackedArtists extends Component
 {
+    use WithPagination;
+
     protected $listeners = ['refreshTrackedArtists' => '$refresh'];
 
     public $search;
@@ -20,7 +23,7 @@ class TrackedArtists extends Component
                 $query->where('artists.name', 'like', "%{$this->search}%");
             })
             ->orderBy('artists.name')
-            ->get();
+            ->paginate(12);
 
         return view('livewire.tracked-artists', [
             'results' => $results,

@@ -18,6 +18,10 @@
                     />
                 @endforeach
             </div>
+
+            <div class="mt-6">
+                {{ $results->links() }}
+            </div>
         @else
             <div>
                 <h3 class="font-bold lg text-center">

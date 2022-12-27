@@ -21,4 +21,9 @@ class Artist extends Model
     {
         return $this->hasMany(UserArtist::class);
     }
+
+    public function relatedArtists()
+    {
+        return $this->hasMany(ArtistRelatedArtist::class);
+    }
 }

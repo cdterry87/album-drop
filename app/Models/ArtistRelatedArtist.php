@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserRecommendation extends Model
+class ArtistRelatedArtist extends Model
 {
     use HasFactory;
 
-    protected $table = 'users_recommendations';
+    protected $table = 'artists_related_artists';
     protected $guarded = [];
 
-    public function user()
+    public function artist()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Artist::class);
     }
 }

@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AlbumReleaseMailLog extends Model
+class UserAlbumRelease extends Model
 {
     use HasFactory;
 
-    protected $table = 'albums_release_mail_logs';
+    protected $table = 'users_albums_releases';
     protected $guarded = [];
 
     public function album()
     {
-        return $this->belongsTo(Album::class);
+        return $this->belongsTo(ArtistAlbum::class);
     }
 
     public function user()

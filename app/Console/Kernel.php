@@ -2,8 +2,8 @@
 
 namespace App\Console;
 
-use App\Jobs\GetArtistAlbumsJob;
-use App\Jobs\SendNewAlbumReleaseMailJob;
+use App\Jobs\ArtistAlbumsJob;
+use App\Jobs\UserAlbumReleaseMailJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -17,17 +17,18 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // Get artist albums on Friday at 3am
-        // $schedule->job(new GetArtistAlbumsJob())->weeklyOn(5, '03:00');
+        // Get artist albums daily at 3am
+        // $schedule->job(new ArtistAlbumsJob())->dailyAt('03:00');
 
         // Send new album release email on Sunday at 3am
-        // $schedule->job(new SendNewAlbumReleaseEmailJob())->weeklyOn(7, '03:00');
+        // $schedule->job(new UserAlbumReleaseMailJob())->weeklyOn(7, '03:00');
 
         /**
          * Local testing
          * Run: sail artisan schedule:work
          */
-        $schedule->job(new SendNewAlbumReleaseMailJob())->everyMinute();
+        // $schedule->job(new ArtistAlbumsJob())->everyMinute();
+        // $schedule->job(new UserAlbumReleaseMailJob())->everyMinute();
     }
 
     /**

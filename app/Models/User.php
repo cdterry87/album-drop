@@ -73,11 +73,18 @@ class User extends Authenticatable
 
     public function albums()
     {
-        return $this->hasManyThrough(Album::class, UserAlbum::class, 'user_id', 'id', 'id', 'album_id');
+        return $this->hasManyThrough(
+            ArtistAlbum::class,
+            UserAlbum::class,
+            'user_id',
+            'id',
+            'id',
+            'album_id'
+        );
     }
 
-    public function albumReleaseMailLogs()
+    public function albumReleases()
     {
-        return $this->hasMany(AlbumReleaseMailLog::class);
+        return $this->hasMany(UserAlbumRelease::class);
     }
 }

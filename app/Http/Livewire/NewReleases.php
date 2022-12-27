@@ -4,17 +4,17 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class RecentReleases extends Component
+class NewReleases extends Component
 {
     public function render()
     {
-        $results = auth()->user()->albumReleaseMailLogs()
+        $results = auth()->user()->albumReleases()
             ->with('album', 'album.artist')
             ->where('created_at', '>=', now()->subDays(30))
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('livewire.recent-releases', [
+        return view('livewire.new-releases', [
             'results' => $results
         ]);
     }

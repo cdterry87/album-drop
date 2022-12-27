@@ -28,7 +28,10 @@
     @else
         <div>
             <h3 class="font-bold lg text-center">
-                No artists were found with that name. Try a different search.
+                You are not tracking any artists. <a
+                    href="{{ route('search-artists') }}"
+                    class="underline"
+                >Search for artists</a>, start tracking them, and they will appear here.
             </h3>
         </div>
     @endif

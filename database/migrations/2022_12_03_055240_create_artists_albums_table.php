@@ -13,10 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('albums_release_mail_logs', function (Blueprint $table) {
+        Schema::create('artists_albums', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('album_id')->constrained('albums');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('artist_id')->constrained('artists')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('spotify_album_id');
+            $table->string('name');
+            $table->string('image');
+            $table->date('release_date');
+            $table->string('url');
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('albums_release_mail_logs');
+        Schema::dropIfExists('albums');
     }
 };

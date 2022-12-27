@@ -283,8 +283,8 @@
                     </li>
                     <li>
                         <a
-                            href="{{ route('recent-releases') }}"
-                            class="{{ request()->routeIs('recent-releases') ? 'active' : '' }}"
+                            href="{{ route('new-releases') }}"
+                            class="{{ request()->routeIs('new-releases') ? 'active' : '' }}"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -300,7 +300,7 @@
                                     d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
                                 />
                             </svg>
-                            Recent Releases
+                            New Releases
                         </a>
                     </li>
                 </ul>

@@ -2,19 +2,19 @@
 
 namespace App\Jobs;
 
-use App\Mail\SendNewAlbumReleaseMail;
 use App\Models\User;
-use App\Models\Album;
-use App\Models\AlbumReleaseMailLog;
+use App\Models\ArtistAlbum;
 use Illuminate\Bus\Queueable;
+use App\Models\UserAlbumRelease;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\SendUserAlbumReleaseMail;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 
-class SendNewAlbumReleaseMailJob implements ShouldQueue
+class UserAlbumReleaseMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -36,7 +36,7 @@ class SendNewAlbumReleaseMailJob implements ShouldQueue
     public function handle()
     {
         // Get only albums released in the past week
-        $albumsReleasedThisWeek = Album::query()
+        $albumsReleasedThisWeek = ArtistAlbum::query()
             ->with('artist')
             ->where('release_date', '>=', now()->subDays(7))
             ->where('release_date', '<=', now())
@@ -53,19 +53,19 @@ class SendNewAlbumReleaseMailJob implements ShouldQueue
             // Get a list of artist ids for this user
             $userArtistsIds = $user
                 ->artists
-                ->pluck('spotify_artist_id');
+                ->pluck('id');
 
             // Check if any of the albums released this week are by one of the user's tracked artists and not in the album release mail log
             $usersAlbumsReleasedThisWeek = $albumsReleasedThisWeek
-                ->whereIn('spotify_artist_id', $userArtistsIds)
-                ->whereNotIn('id', $user->albumReleaseMailLogs->pluck('album_id'));
+                ->whereIn('artist_id', $userArtistsIds)
+                ->whereNotIn('id', $user->albumReleases->pluck('album_id'));
 
             // If the user has albums released this week by any of their tracked artists, send an email
             if ($usersAlbumsReleasedThisWeek->count() > 0) {
-                Mail::to($user->email)->send(new SendNewAlbumReleaseMail($user, $usersAlbumsReleasedThisWeek));
+                Mail::to($user->email)->send(new SendUserAlbumReleaseMail($user, $usersAlbumsReleasedThisWeek));
 
                 // Log that this user was sent an email with these albums so they don't get sent again
-                AlbumReleaseMailLog::query()->insert(
+                UserAlbumRelease::query()->insert(
                     $usersAlbumsReleasedThisWeek->map(function ($album) use ($user) {
                         return [
                             'album_id' => $album->id,

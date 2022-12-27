@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Aerni\Spotify\Facades\SpotifyFacade as Spotify;
 use App\Http\Livewire\Dashboard;
-use App\Http\Livewire\RecentReleases;
+use App\Http\Livewire\NewReleases;
 use App\Http\Livewire\RecommendedArtists;
 use App\Http\Livewire\SearchArtists;
 use App\Http\Livewire\TrackedArtists;
@@ -28,19 +27,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    // Route::get('/dashboard', function () {
-    //     $results = Spotify::searchArtists('a day to remember')->get();
-    //     dd($results);
-
-    //     return view('dashboard');
-    // })->name('dashboard');
-
     /**
      * Dashboard
-     *
-     * - Show a few latest albums from saved artists
-     * - Show a few recommended artists
-     * - Show a few of the user's notifications
      */
     Route::get('dashboard', Dashboard::class)
         ->name('dashboard');
@@ -58,20 +46,20 @@ Route::middleware([
         ->name('tracked-artists');
 
     /**
-     * Recommended Artists (based on saved artists)
+     * Artist Albums
+     *
+     * @todo - on the Tracked Artists page, each artist should have a link to their albums.
+     */
+
+    /**
+     * Recommended Artists (based on tracked artists)
      */
     Route::get('recommended-artists', RecommendedArtists::class)
         ->name('recommended-artists');
 
     /**
-     * Recent Releases
+     * New Releases
      */
-    Route::get('recent-releases', RecentReleases::class)
-        ->name('recent-releases');
-
-    /**
-     * Notifications
-     */
-    Route::get('notifications', RecentReleases::class)
-        ->name('recent-releases');
+    Route::get('new-releases', NewReleases::class)
+        ->name('new-releases');
 });

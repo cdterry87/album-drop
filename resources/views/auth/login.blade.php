@@ -82,6 +82,20 @@
                             {{ __('Log in') }}
                         </x-jet-button>
                     </div>
+
+                    <hr class="my-4">
+
+                    <div class="flex items-center justify-center text-sm text-gray-600 gap-1">
+                        <span>
+                            or
+                        </span>
+                        <a
+                            class="underline hover:text-gray-900"
+                            href="{{ route('register') }}"
+                        >
+                            {{ __('Register for an Account!') }}
+                        </a>
+                    </div>
                 </form>
             </x-jet-authentication-card>
         </div>

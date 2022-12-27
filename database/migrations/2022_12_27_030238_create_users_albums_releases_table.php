@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users_albums', function (Blueprint $table) {
+        Schema::create('users_albums_releases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('album_id')->constrained('artists_albums')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('album_id')->constrained('artists_albums');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_albums');
+        Schema::dropIfExists('users_albums_releases');
     }
 };

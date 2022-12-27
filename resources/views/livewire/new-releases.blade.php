@@ -1,6 +1,6 @@
 <div>
     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-        <h2 class="font-bold text-2xl">Recent Releases</h2>
+        <h2 class="font-bold text-2xl">New Releases</h2>
     </div>
 
     <hr class="my-8 border-gray-600">
@@ -22,7 +22,8 @@
     @else
         <div>
             <h3 class="font-bold lg text-center">
-                No artists were found with that name. Try a different search.
+                There are no new releases at the moment. Track your favorite artists to get notified when they release
+                new music!
             </h3>
         </div>
     @endif

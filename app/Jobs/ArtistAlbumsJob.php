@@ -2,10 +2,10 @@
 
 namespace App\Jobs;
 
-use App\Models\Album;
 use App\Models\Artist;
 use App\Models\UserAlbum;
 use App\Models\UserArtist;
+use App\Models\ArtistAlbum;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Aerni\Spotify\Facades\SpotifyFacade;
@@ -14,7 +14,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 
-class GetArtistAlbumsJob implements ShouldQueue
+class ArtistAlbumsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -37,7 +37,7 @@ class GetArtistAlbumsJob implements ShouldQueue
     {
         // Get all (distinct) artists in the system
         $artists = Artist::distinct()
-            ->select('spotify_artist_id', 'name')
+            ->select('id', 'spotify_artist_id', 'name')
             ->orderBy('name', 'asc')
             ->get();
 
@@ -64,9 +64,9 @@ class GetArtistAlbumsJob implements ShouldQueue
                 }
 
                 // Update or create the album
-                $newAlbum = Album::updateOrCreate([
+                $newAlbum = ArtistAlbum::updateOrCreate([
+                    'artist_id' => $artist->id,
                     'spotify_album_id' => $albumId,
-                    'spotify_artist_id' => $artistId,
                 ], [
                     'name' => $album['name'],
                     'release_date' => $releaseDate,

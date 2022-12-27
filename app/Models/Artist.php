@@ -14,7 +14,7 @@ class Artist extends Model
 
     public function albums()
     {
-        return $this->hasMany(Album::class, 'spotify_artist_id', 'spotify_artist_id');
+        return $this->hasMany(ArtistAlbum::class);
     }
 
     public function userArtists()

@@ -8,8 +8,10 @@
     <div class="card-body h-full flex justify-between gap-6">
         <div class="space-y-1">
             <h2 class="card-title text-2xl">{{ $name }}</h2>
-            <h3 class="text-sm">by <span class="text-xl">{{ $artist }}</span></h3>
-            <h4 class="text-xs">on {{ $releaseDate->format('F j, Y') }}</h4>
+            @if ($artist)
+                <h3 class="text-sm"><span class="text-xl">{{ $artist }}</span></h3>
+            @endif
+            <h4 class="text-xs">Released: {{ $releaseDate->format('F j, Y') }}</h4>
         </div>
         <div class="card-actions justify-end">
             <a

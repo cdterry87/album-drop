@@ -33,6 +33,7 @@ module.exports = {
                     "secondary": "#D926A9",
                     "accent": "#1FB2A6",
                     ".btn-spotify": {
+                        "border-color": "#1DB954",
                         "background-color": "#1DB954",
                         "color": "#FFFFFF",
                     },

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\ArtistAlbums;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\NewReleases;
@@ -47,9 +48,9 @@ Route::middleware([
 
     /**
      * Artist Albums
-     *
-     * @todo - on the Tracked Artists page, each artist should have a link to their albums.
      */
+    Route::get('artist-albums/{artistSpotifyId}', ArtistAlbums::class)
+        ->name('artist-albums');
 
     /**
      * Recommended Artists (based on tracked artists)

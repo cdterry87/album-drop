@@ -6,7 +6,7 @@
     <hr class="my-8 border-gray-600">
 
     @if ($results->isNotEmpty())
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 w-full">
             @foreach ($results as $result)
                 <livewire:components.album-card
                     :name="$result->album->name"

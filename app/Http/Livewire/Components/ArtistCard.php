@@ -9,6 +9,7 @@ use App\Models\UserArtist;
 class ArtistCard extends Component
 {
     public $name, $image, $url, $spotifyId;
+    public $hasAlbums = false;
     public $isTracked = false;
 
     public function render()

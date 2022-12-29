@@ -3,10 +3,14 @@
         <div class="stat">
             <div class="stat-title">Artists You're Tracking</div>
             <div class="stat-value">0</div>
-            <div class="stat-desc"><a
+            <div class="stat-desc">
+                <a
                     class="link"
                     href="{{ route('search-artists') }}"
-                >Search for more</a></div>
+                >
+                    Search for more
+                </a>
+            </div>
         </div>
         <div class="stat">
             <div class="stat-title">New Albums</div>

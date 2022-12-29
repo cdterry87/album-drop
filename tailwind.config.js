@@ -31,11 +31,15 @@ module.exports = {
                 mytheme: {
                     "primary": "#1d4ed8",
                     "secondary": "#D926A9",
-                    "accent": "#1FB2A6",
+                    "accent": "#6419E6",
                     ".btn-spotify": {
                         "border-color": "#1DB954",
                         "background-color": "#1DB954",
                         "color": "#FFFFFF",
+                    },
+                    '.btn-spotify:hover': {
+                        'background-color': '#109b41',
+                        'border-color': '#109b41',
                     },
                     "neutral": "#191D24",
                     "base-100": "#2A303C",

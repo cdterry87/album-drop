@@ -5,7 +5,7 @@
             alt="{{ $name }}"
         />
     </figure>
-    <div class="card-body h-full flex justify-between items-center gap-6">
+    <div class="card-body h-full flex justify-between gap-6">
         <h2
             class="card-title text-3xl"
             title="{{ $name }}"
@@ -13,7 +13,7 @@
         >
             {{ Str::limit($name, 30) }}
         </h2>
-        <div class="card-actions justify-center gap-3">
+        <div class="card-actions justify-end gap-3">
             @if ($hasAlbums)
                 <a
                     href="{{ route('artist-albums', $spotifyId) }}"

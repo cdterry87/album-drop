@@ -2,7 +2,7 @@
 
 use App\Http\Livewire\ArtistAlbums;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\Home;
 use App\Http\Livewire\NewReleases;
 use App\Http\Livewire\RecommendedArtists;
 use App\Http\Livewire\SearchArtists;
@@ -31,8 +31,8 @@ Route::middleware([
     /**
      * Dashboard
      */
-    Route::get('dashboard', Dashboard::class)
-        ->name('dashboard');
+    Route::get('home', Home::class)
+        ->name('home');
 
     /**
      * Search Artists

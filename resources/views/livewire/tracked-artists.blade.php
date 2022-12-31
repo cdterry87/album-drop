@@ -4,10 +4,8 @@
         subtitle="You will receive notifications when your tracked artists below release new albums."
     >
         <div class="flex items-center gap-2">
-            <input
-                type="text"
+            <x-inputs.text
                 placeholder="Search your tracked artists..."
-                class="input input-bordered input-primary lg:w-full max-w-xs outline-none ring-0"
                 wire:model.debounce.500ms="search"
             />
         </div>

@@ -4,31 +4,35 @@
         subtitle="Track artists to receive notifications when they release new albums."
     >
         @if ($isSearchComplete)
-            <button
-                class="btn btn-secondary gap-2"
+            <x-inputs.button
+                class="btn-secondary"
                 wire:click.prevent="clearSearch"
             >
-                <x-icons.cancel />
-                Clear Search
-            </button>
+                <div class="flex items-center gap-2">
+                    <x-icons.cancel />
+                    <span class="hidden md:inline">
+                        Clear Search
+                    </span>
+                </div>
+            </x-inputs.button>
         @else
             <form wire:submit.prevent="search">
                 <div class="flex items-center gap-2">
-                    <input
-                        type="text"
-                        placeholder="Search for an artist"
-                        class="input input-bordered input-primary lg:w-full max-w-xs outline-none ring-0"
+                    <x-inputs.text
+                        placeholder="Search for an artist..."
                         wire:model.defer="search"
                     />
-                    <button
-                        class="btn btn-primary gap-2"
+                    <x-inputs.button
+                        class="btn-primary"
                         wire:click.prevent="search"
                     >
-                        <x-icons.search />
-                        <span class="hidden md:inline">
-                            Search
-                        </span>
-                    </button>
+                        <div class="flex items-center gap-2">
+                            <x-icons.search />
+                            <span class="hidden md:inline">
+                                Search
+                            </span>
+                        </div>
+                    </x-inputs.button>
                 </div>
             </form>
         @endif

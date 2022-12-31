@@ -7,9 +7,21 @@
     </figure>
     <div class="card-body h-full flex justify-between gap-6">
         <div class="space-y-1">
-            <h2 class="card-title text-2xl">{{ $name }}</h2>
+            <h2
+                class="card-title text-2xl"
+                title="{{ $name }}"
+                alt="{{ $name }}"
+            >
+                {{ Str::limit($name, 30) }}
+            </h2>
             @if ($artist)
-                <h3 class="text-sm"><span class="text-xl">{{ $artist }}</span></h3>
+                <h3
+                    class="text-sm"
+                    title="{{ $artist }}"
+                    alt="{{ $artist }}"
+                >
+                    <span class="text-xl">{{ Str::limit($artist, 30) }}</span>
+                </h3>
             @endif
             <h4 class="text-xs">Released: {{ $releaseDate->format('F j, Y') }}</h4>
         </div>

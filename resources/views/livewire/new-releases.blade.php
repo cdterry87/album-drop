@@ -1,21 +1,31 @@
 <div>
-    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-        <h2 class="font-bold text-2xl">New Releases</h2>
-    </div>
-
-    <hr class="my-8 border-gray-600">
+    <x-header
+        title="New Releases"
+        subtitle="Check out the latest releases from your tracked artists!"
+    >
+        <select
+            class="select select-bordered w-full max-w-xs"
+            wire:model="days"
+        >
+            <option value="30">Past 30 Days</option>
+            <option value="90">Past 90 Days</option>
+            <option value="180">Past 180 Days</option>
+            <option value="365">Past 365 Days</option>
+            <option value="">All Time</option>
+        </select>
+    </x-header>
 
     @if ($results->isNotEmpty())
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 w-full">
             @foreach ($results as $result)
                 <livewire:components.album-card
-                    :name="$result->album->name"
-                    :artist="$result->album->artist->name"
-                    :release-date="$result->album->release_date"
-                    :image="$result->album->image"
-                    :url="$result->album->url"
-                    :spotify-id="$result->album->spotify_album_id"
-                    wire:key="{{ $result->album->spotify_album_id }}"
+                    :name="$result->name"
+                    :artist="$result->artist->name"
+                    :release-date="$result->release_date"
+                    :image="$result->image"
+                    :url="$result->url"
+                    :spotify-id="$result->spotify_album_id"
+                    wire:key="{{ $result->spotify_album_id }}"
                 />
             @endforeach
         </div>

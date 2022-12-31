@@ -1,17 +1,17 @@
 <div>
-    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-        <h2 class="font-bold text-2xl">Tracked Artists</h2>
+    <x-header
+        title="Tracked Artists"
+        subtitle="You will receive notifications when your tracked artists below release new albums."
+    >
         <div class="flex items-center gap-2">
             <input
                 type="text"
-                placeholder="Search tracked artists"
+                placeholder="Search your tracked artists..."
                 class="input input-bordered input-primary lg:w-full max-w-xs outline-none ring-0"
                 wire:model.debounce.500ms="search"
             />
         </div>
-    </div>
-
-    <hr class="my-8 border-gray-600">
+    </x-header>
 
     @if ($results->isNotEmpty())
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 w-full">

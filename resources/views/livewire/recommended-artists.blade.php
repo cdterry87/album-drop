@@ -1,9 +1,8 @@
 <div>
-    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-        <h2 class="font-bold text-2xl">Recommended Artists</h2>
-    </div>
-
-    <hr class="my-8 border-gray-600">
+    <x-header
+        title="Recommended Artists"
+        subtitle="We recommend these artists based on the artists you are tracking."
+    />
 
     <div>
         @if ($results)

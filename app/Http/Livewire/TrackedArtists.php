@@ -16,6 +16,7 @@ class TrackedArtists extends Component
 
     public function render()
     {
+        // Get user's tracked artists
         $results = UserArtist::select('artists.name', 'artists.image', 'artists.url', 'artists.spotify_artist_id')
             ->where('user_id', auth()->id())
             ->join('artists', 'artists.id', '=', 'users_artists.artist_id')

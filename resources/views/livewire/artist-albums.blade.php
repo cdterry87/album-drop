@@ -1,9 +1,8 @@
 <div>
-    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-        <h2 class="font-bold text-2xl">{{ $artistName }}'s Albums</h2>
-    </div>
-
-    <hr class="my-8 border-gray-600">
+    <x-header
+        title="All Albums"
+        subtitle="for {{ $artistName }}"
+    />
 
     @if ($results->isNotEmpty())
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 w-full">

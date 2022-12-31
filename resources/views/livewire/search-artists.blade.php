@@ -1,6 +1,8 @@
 <div>
-    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-        <h2 class="font-bold text-2xl">Search Artists</h2>
+    <x-header
+        title="Search Artists"
+        subtitle="Track artists to receive notifications when they release new albums."
+    >
         @if ($isSearchComplete)
             <button
                 class="btn btn-secondary gap-2"
@@ -56,9 +58,7 @@
                 </div>
             </form>
         @endif
-    </div>
-
-    <hr class="my-8 border-gray-600">
+    </x-header>
 
     <div class="text-center">
         @if ($isSearchComplete)

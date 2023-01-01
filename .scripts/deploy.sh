@@ -21,7 +21,7 @@ php artisan clear-compiled
 php artisan optimize
 
 # Compile npm assets
-npm run prod
+npm run build
 
 # Clear caches
 php artisan cache:clear

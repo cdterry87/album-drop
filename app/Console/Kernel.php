@@ -22,7 +22,7 @@ class Kernel extends ConsoleKernel
         $schedule->job(new ArtistAlbumsJob())->everyOddHour();
 
         // Get related artists
-        $schedule->job(new ArtistRelatedArtistJob())->everyEvenHour();
+        $schedule->job(new ArtistRelatedArtistJob())->everyTwoHours();
 
         // Send new album release email once per week
         $schedule->job(new UserAlbumReleaseMailJob())->weeklyOn(7, '10:00');

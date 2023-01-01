@@ -24,8 +24,8 @@ class Kernel extends ConsoleKernel
         // Get related artists daily at 6am
         $schedule->job(new ArtistRelatedArtistJob())->dailyAt('06:00');
 
-        // Send new album release email on Sunday at 9am
-        $schedule->job(new UserAlbumReleaseMailJob())->weeklyOn(7, '03:00');
+        // Send new album release email on Sunday at 10am
+        $schedule->job(new UserAlbumReleaseMailJob())->weeklyOn(7, '10:00');
 
         /**
          * Local testing

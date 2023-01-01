@@ -82,4 +82,9 @@ class User extends Authenticatable
             'album_id'
         );
     }
+
+    public function albumReleases()
+    {
+        return $this->hasMany(UserAlbumRelease::class);
+    }
 }

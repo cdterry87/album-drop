@@ -19,9 +19,12 @@ use App\Http\Livewire\TrackedArtists;
 |
 */
 
+/**
+ * Welcome
+ */
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+})->name('welcome');
 
 Route::middleware([
     'auth:sanctum',
@@ -29,10 +32,10 @@ Route::middleware([
     'verified'
 ])->group(function () {
     /**
-     * Dashboard
+     * Home
      */
     Route::get('home', Home::class)
-        ->name('dashboard');
+        ->name('home');
 
     /**
      * Search Artists

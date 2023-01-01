@@ -125,7 +125,7 @@
                 class="drawer-overlay"
             ></label>
             <div class="menu p-4 w-80 bg-base-300 text-base-content">
-                <a href="{{ route('dashboard') }}">
+                <a href="{{ route('home') }}">
                     <h1 class="text-3xl font-bold">{{ env('APP_NAME') }}</h1>
                 </a>
                 <label
@@ -151,8 +151,8 @@
                 <ul>
                     <li>
                         <a
-                            href="{{ route('dashboard') }}"
-                            class="{{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                            href="{{ route('home') }}"
+                            class="{{ request()->routeIs('home') ? 'active' : '' }}"
                         >
                             <x-icons.home />
                             Home

@@ -35,7 +35,7 @@
                 <a
                     role="button"
                     class="btn btn-primary"
-                    href="{{ route('dashboard') }}"
+                    href="{{ route('home') }}"
                 >Get Started!
                 </a>
                 <div class="text-white mt-12">

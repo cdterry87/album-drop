@@ -15,6 +15,8 @@ class RecommendedArtists extends Component
 
     protected $listeners = ['refreshTrackedArtists' => '$refresh'];
 
+    public $search;
+
     public function render()
     {
         // Get user's artists
@@ -26,6 +28,9 @@ class RecommendedArtists extends Component
         $results = ArtistRelatedArtist::query()
             ->whereIn('artist_id', $userArtists->pluck('artist_id'))
             ->whereNotIn('spotify_artist_id', $userArtists->pluck('spotify_artist_id'))
+            ->when(strlen($this->search) > 2, function ($query) {
+                $query->where('name', 'like', "%{$this->search}%");
+            })
             ->groupBy('spotify_artist_id') // requires config.database.connections.mysql.strict = false; otherwise without this line it shows duplicates if multiple artists are related to the same artist
             ->orderBy('name')
             ->paginate(12);

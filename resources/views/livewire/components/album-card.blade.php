@@ -16,14 +16,14 @@
             </h2>
             @if ($artist)
                 <h3
-                    class="text-sm"
+                    class="text-lg"
                     title="{{ $artist }}"
                     alt="{{ $artist }}"
                 >
-                    <span class="text-xl">{{ Str::limit($artist, 30) }}</span>
+                    {{ Str::limit($artist, 30) }}
                 </h3>
             @endif
-            <h4 class="text-xs">Released: {{ $releaseDate->format('F j, Y') }}</h4>
+            <h4 class="text-xs pt-2">Released: {{ $releaseDate->format('F j, Y') }}</h4>
         </div>
         <div class="card-actions justify-end">
             <a

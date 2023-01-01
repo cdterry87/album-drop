@@ -30,7 +30,7 @@
         </div>
     @else
         <div>
-            <h3 class="font-bold lg text-center">
+            <h3 class="text-center lg:text-left">
                 You are not tracking any artists. <a
                     href="{{ route('search-artists') }}"
                     class="underline"

@@ -5,7 +5,7 @@
         <div class="flex flex-col gap-1">
             <h2 class="font-bold text-2xl">{{ $title }}</h2>
             @if ($subtitle)
-                <h3 class="font-semibold text-sm">{{ $subtitle }}</h3>
+                <h3 class="text-sm">{{ $subtitle }}</h3>
             @endif
         </div>
         {{ $slot }}

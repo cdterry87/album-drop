@@ -35,7 +35,7 @@
         </div>
     @else
         <div>
-            <h3 class="font-bold lg text-center">
+            <h3 class="text-center lg:text-left">
                 There are no new releases at the moment. Track your favorite artists to get notified when they release
                 new music!
             </h3>

@@ -2,7 +2,14 @@
     <x-header
         title="Recommended Artists"
         subtitle="We recommend these artists based on the artists you are tracking."
-    />
+    >
+        <div class="flex items-center gap-2">
+            <x-inputs.text
+                placeholder="Search recommended artists..."
+                wire:model.debounce.500ms="search"
+            />
+        </div>
+    </x-header>
 
     <div>
         @if ($results)
@@ -23,7 +30,7 @@
             </div>
         @else
             <div>
-                <h3 class="font-bold lg text-center">
+                <h3 class="text-center lg:text-left">
                     You do not have any recommendations. Track more artists and check back later to get recommendations.
                 </h3>
             </div>

@@ -63,7 +63,7 @@
                                             <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
                                         </svg>
                                     </a>
-                                    <ul class="p-2 bg-base-300">
+                                    <ul class="p-2 bg-base-300 z-40 border border-gray-500">
                                         <li>
                                             <a href="{{ route('profile.show') }}">
                                                 <x-icons.settings />
@@ -181,7 +181,7 @@
                             href="{{ route('recommended-artists') }}"
                             class="{{ request()->routeIs('recommended-artists') ? 'active' : '' }}"
                         >
-                            <x-icons.star />
+                            <x-icons.fire />
                             Recommended Artists
                         </a>
                     </li>

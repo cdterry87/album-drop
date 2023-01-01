@@ -23,7 +23,7 @@
         </div>
     @else
         <div>
-            <h3 class="font-bold lg text-center">
+            <h3 class="text-center lg:text-left">
                 Sorry, we don't have any album data for this artist at the moment. Check back later for updates!
             </h3>
         </div>

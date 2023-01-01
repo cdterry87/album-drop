@@ -1,7 +1,7 @@
 @props(['title', 'subtitle'])
 
 <div>
-    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex flex-col text-center md:flex-row md:text-left items-center justify-between gap-6">
         <div class="flex flex-col gap-1">
             <h2 class="font-bold text-2xl">{{ $title }}</h2>
             @if ($subtitle)

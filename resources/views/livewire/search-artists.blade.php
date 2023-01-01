@@ -10,9 +10,7 @@
             >
                 <div class="flex items-center gap-2">
                     <x-icons.cancel />
-                    <span class="hidden md:inline">
-                        Clear Search
-                    </span>
+                    Clear Search
                 </div>
             </x-inputs.button>
         @else

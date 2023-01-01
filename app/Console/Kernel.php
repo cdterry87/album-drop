@@ -18,22 +18,22 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // Get artist albums daily at 2am
-        $schedule->job(new ArtistAlbumsJob())->dailyAt('02:00');
+        // Get artist albums
+        $schedule->job(new ArtistAlbumsJob())->everyOddHour();
 
-        // Get related artists daily at 6am
-        $schedule->job(new ArtistRelatedArtistJob())->dailyAt('06:00');
+        // Get related artists
+        $schedule->job(new ArtistRelatedArtistJob())->everyEvenHour();
 
-        // Send new album release email on Sunday at 10am
+        // Send new album release email once per week
         $schedule->job(new UserAlbumReleaseMailJob())->weeklyOn(7, '10:00');
 
         /**
          * Local testing
          * Run: sail artisan schedule:work
          */
-        $schedule->job(new ArtistAlbumsJob())->everyMinute();
-        $schedule->job(new ArtistRelatedArtistJob())->everyMinute();
-        $schedule->job(new UserAlbumReleaseMailJob())->everyMinute();
+        // $schedule->job(new ArtistAlbumsJob())->everyMinute();
+        // $schedule->job(new ArtistRelatedArtistJob())->everyMinute();
+        // $schedule->job(new UserAlbumReleaseMailJob())->everyMinute();
     }
 
     /**

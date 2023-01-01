@@ -32,7 +32,7 @@ Route::middleware([
      * Dashboard
      */
     Route::get('home', Home::class)
-        ->name('home');
+        ->name('dashboard');
 
     /**
      * Search Artists

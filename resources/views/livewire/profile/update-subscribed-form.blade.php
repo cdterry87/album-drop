@@ -1,10 +1,10 @@
 <x-jet-form-section submit="updateSubscribed">
     <x-slot name="title">
-        {{ __('Subscription') }}
+        {{ __('Notifications Settings') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Subscribe to receive an email when your tracked artists drop a new album.') }}
+        {{ __('Enable notifications to receive an email when your tracked artists drop a new album.') }}
     </x-slot>
 
     <x-slot name="form">
@@ -16,7 +16,7 @@
             <div>
                 <x-jet-label
                     for="subscribed"
-                    value="{{ __('I would like to receive an email notification when my tracked artists release new albums.') }}"
+                    value="{{ __('I would like to receive email notifications when my tracked artists release new albums.') }}"
                 />
             </div>
         </div>

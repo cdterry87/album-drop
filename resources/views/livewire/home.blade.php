@@ -4,8 +4,7 @@
             <div class="flex flex-col md:flex-row items-center gap-4">
                 <x-icons.check />
                 <span>
-                    You are subscribed and will receive email notifications when your tracked artists release new
-                    albums. You may unsubscribe in your user settings.
+                    Notifications are enabled. You will receive emails when your tracked artists release new albums.
                 </span>
             </div>
         </div>
@@ -14,15 +13,15 @@
             <div class="flex flex-col items-center gap-4">
                 <div class="flex flex-col items-center gap-4 lg:flex-row">
                     <x-icons.warning />
-                    <span>
-                        You are not subscribed and will not receive email notifications when your tracked artists
-                        release new albums. Would you like to enable email notifications?
-                    </span>
+                    <p>
+                        You must enable notifications to receive email notifications when your tracked artists release
+                        new albums. Would you like to enable notifications now?
+                    </p>
                 </div>
                 <button
                     class="btn btn-sm btn-black"
                     wire:click.prevent="subscribe"
-                >Yes, send me emails!</button>
+                >Yes, enable notifications!</button>
             </div>
         </div>
     @endif

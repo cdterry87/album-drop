@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
 use App\Models\UserArtist;
 use App\Models\ArtistAlbum;
@@ -9,6 +10,14 @@ use App\Models\ArtistRelatedArtist;
 
 class Home extends Component
 {
+    public $isUserSubscribed = false;
+
+    public function mount()
+    {
+        // Check if user is subscribed
+        $this->isUserSubscribed = auth()->user()->subscribed;
+    }
+
     public function render()
     {
         // Get the last 5 new releases for the user
@@ -64,5 +73,14 @@ class Home extends Component
             'latestNewReleases' => $latestNewReleases,
             'randomRecommendedArtists' => $randomRecommendedArtists
         ]);
+    }
+
+    public function subscribe()
+    {
+        User::where('id', auth()->user()->id)->update([
+            'subscribed' => true,
+        ]);
+
+        $this->isUserSubscribed = true;
     }
 }

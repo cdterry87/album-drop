@@ -1,6 +1,32 @@
-{{-- @todo - if user is not subscribed (default) show a popup asking for permission to send emails. If they say yes, it will set subscribed = true in their account --}}
-
 <div class="flex flex-col gap-10">
+    @if ($isUserSubscribed)
+        <div class="alert alert-success shadow-lg">
+            <div class="flex flex-col md:flex-row items-center gap-4">
+                <x-icons.check />
+                <span>
+                    You are subscribed and will receive email notifications when your tracked artists release new
+                    albums. You may unsubscribe in your user settings.
+                </span>
+            </div>
+        </div>
+    @else
+        <div class="alert alert-warning shadow-lg">
+            <div class="flex flex-col items-center gap-4">
+                <div class="flex flex-col items-center gap-4 lg:flex-row">
+                    <x-icons.warning />
+                    <span>
+                        You are not subscribed and will not receive email notifications when your tracked artists
+                        release new albums. Would you like to enable email notifications?
+                    </span>
+                </div>
+                <button
+                    class="btn btn-sm btn-black"
+                    wire:click.prevent="subscribe"
+                >Yes, send me emails!</button>
+            </div>
+        </div>
+    @endif
+
     <div class="stats stats-vertical lg:stats-horizontal shadow bg-base-300 w-full">
         <div class="stat">
             <div class="stat-title">Artists You're Tracking</div>

@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire\Profile;
 
+use App\Models\User;
 use Livewire\Component;
 
 class UpdateSubscribedForm extends Component
 {
-    public $subscribed;
+    public $subscribed = false;
 
     public function mount()
     {
@@ -20,7 +21,7 @@ class UpdateSubscribedForm extends Component
 
     public function updateSubscribed()
     {
-        auth()->user()->update([
+        User::where('id', auth()->user()->id)->update([
             'subscribed' => $this->subscribed,
         ]);
 

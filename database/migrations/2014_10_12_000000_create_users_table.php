@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('country', 2)->default('US');
-            $table->boolean('subscribed')->default(true);
+            $table->boolean('subscribed')->default(false);
             // $table->string('unsubscribe_token')->unique(); // @todo - to be used for one-click unsubscribe
             $table->timestamps();
         });

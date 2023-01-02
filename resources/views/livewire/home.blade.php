@@ -1,3 +1,5 @@
+{{-- @todo - if user is not subscribed (default) show a popup asking for permission to send emails. If they say yes, it will set subscribed = true in their account --}}
+
 <div class="flex flex-col gap-10">
     <div class="stats stats-vertical lg:stats-horizontal shadow bg-base-300 w-full">
         <div class="stat">

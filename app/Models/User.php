@@ -86,8 +86,8 @@ class User extends Authenticatable
         );
     }
 
-    public function albumReleases()
+    public function albumDrops()
     {
-        return $this->hasMany(UserAlbumRelease::class);
+        return $this->hasMany(UserAlbumDrop::class);
     }
 }

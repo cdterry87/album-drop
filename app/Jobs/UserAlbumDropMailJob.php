@@ -4,17 +4,17 @@ namespace App\Jobs;
 
 use App\Models\User;
 use App\Models\ArtistAlbum;
+use App\Models\UserAlbumDrop;
 use Illuminate\Bus\Queueable;
-use App\Models\UserAlbumRelease;
+use App\Mail\SendUserAlbumDropMail;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendUserAlbumReleaseMail;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 
-class UserAlbumReleaseMailJob implements ShouldQueue
+class UserAlbumDropMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -38,8 +38,8 @@ class UserAlbumReleaseMailJob implements ShouldQueue
      */
     public function handle()
     {
-        // Get only albums released in the past week
-        $albumsReleasedThisWeek = ArtistAlbum::query()
+        // Get only albums released in the time period specified
+        $albumsReleasedRecently = ArtistAlbum::query()
             ->with('artist')
             ->where('release_date', '>=', now()->subDays($this->days))
             ->where('release_date', '<=', now())
@@ -59,17 +59,17 @@ class UserAlbumReleaseMailJob implements ShouldQueue
                 ->pluck('id');
 
             // Check if any of the albums released this week are by one of the user's tracked artists and not in the album release mail log
-            $usersAlbumsReleasedThisWeek = $albumsReleasedThisWeek
+            $usersAlbumsReleasedRecently = $albumsReleasedRecently
                 ->whereIn('artist_id', $userArtistsIds)
-                ->whereNotIn('id', $user->albumReleases->pluck('album_id'));
+                ->whereNotIn('id', $user->albumDrops->pluck('album_id'));
 
             // If the user has albums released this week by any of their tracked artists, send an email
-            if ($usersAlbumsReleasedThisWeek->count() > 0) {
-                Mail::to($user->email)->send(new SendUserAlbumReleaseMail($user, $usersAlbumsReleasedThisWeek));
+            if ($usersAlbumsReleasedRecently->count() > 0) {
+                Mail::to($user->email)->send(new SendUserAlbumDropMail($user, $usersAlbumsReleasedRecently));
 
                 // Log that this user was sent an email with these albums so they don't get sent again
-                UserAlbumRelease::query()->insert(
-                    $usersAlbumsReleasedThisWeek->map(function ($album) use ($user) {
+                UserAlbumDrop::query()->insert(
+                    $usersAlbumsReleasedRecently->map(function ($album) use ($user) {
                         return [
                             'album_id' => $album->id,
                             'user_id' => $user->id,

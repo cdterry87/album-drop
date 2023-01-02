@@ -3,8 +3,8 @@
 namespace App\Console;
 
 use App\Jobs\ArtistAlbumsJob;
+use App\Jobs\UserAlbumDropMailJob;
 use App\Jobs\ArtistRelatedArtistJob;
-use App\Jobs\UserAlbumReleaseMailJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -25,15 +25,15 @@ class Kernel extends ConsoleKernel
         $schedule->job(new ArtistRelatedArtistJob())->everyTwoHours();
 
         // Send new album release email once per week
-        $schedule->job(new UserAlbumReleaseMailJob())->weeklyOn(1, '11:00');
+        $schedule->job(new UserAlbumDropMailJob())->weeklyOn(1, '11:00');
 
         /**
          * Local testing
          * Run: sail artisan schedule:work
          */
-        // $schedule->job(new ArtistAlbumsJob())->everyMinute();
-        // $schedule->job(new ArtistRelatedArtistJob())->everyMinute();
-        // $schedule->job(new UserAlbumReleaseMailJob())->everyMinute();
+        $schedule->job(new ArtistAlbumsJob())->everyMinute();
+        $schedule->job(new ArtistRelatedArtistJob())->everyMinute();
+        $schedule->job(new UserAlbumDropMailJob())->everyMinute();
     }
 
     /**

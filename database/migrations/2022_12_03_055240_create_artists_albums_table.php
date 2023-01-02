@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Albums for artists pulled from Spotify API when users track them.
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

@@ -5,10 +5,12 @@ namespace App\Http\Livewire;
 use App\Models\Artist;
 use Livewire\Component;
 use App\Models\ArtistAlbum;
+use App\Traits\ArtistAlbumTrait;
 use Livewire\WithPagination;
 
 class ArtistAlbums extends Component
 {
+    use ArtistAlbumTrait;
     use WithPagination;
 
     public $artistSpotifyId, $artistId, $artistName;
@@ -27,15 +29,29 @@ class ArtistAlbums extends Component
 
     public function render()
     {
+        return view('livewire.artist-albums', [
+            'results' => $this->getArtistAlbums()
+        ]);
+    }
+
+    protected function getArtistAlbums()
+    {
         $results = ArtistAlbum::query()
             ->where('artist_id', $this->artistId)
             ->orderBy('release_date', 'desc')
             ->paginate(12);
 
-        // @todo - if no results are found, call the spotify API to get artist's albums
+        // If artist currently has no albums in the system, get them from Spotify and save them to the database
+        if ($results->isEmpty()) {
+            $this->getAndSaveArtistAlbums($this->artistId, $this->artistSpotifyId);
 
-        return view('livewire.artist-albums', [
-            'results' => $results
-        ]);
+            // Try again to get artist albums from the database
+            $results = ArtistAlbum::query()
+                ->where('artist_id', $this->artistId)
+                ->orderBy('release_date', 'desc')
+                ->paginate(12);
+        }
+
+        return $results;
     }
 }

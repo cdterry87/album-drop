@@ -203,20 +203,20 @@
                     </li>
                     <li>
                         <a
-                            href="{{ route('recommended-artists') }}"
-                            class="{{ request()->routeIs('recommended-artists') ? 'active' : '' }}"
-                        >
-                            <x-icons.fire />
-                            Recommended Artists
-                        </a>
-                    </li>
-                    <li>
-                        <a
                             href="{{ route('new-releases') }}"
                             class="{{ request()->routeIs('new-releases') ? 'active' : '' }}"
                         >
                             <x-icons.new />
                             New Releases
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="{{ route('recommended-artists') }}"
+                            class="{{ request()->routeIs('recommended-artists') ? 'active' : '' }}"
+                        >
+                            <x-icons.fire />
+                            Recommended Artists
                         </a>
                     </li>
                 </ul>

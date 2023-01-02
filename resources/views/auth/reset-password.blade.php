@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div
         class="hero min-h-screen"
-        style="background-image:url({{ url('/images/mick-haupt-jzPjVrT2Xqg-unsplash.jpg') }})"
+        style="background-image:url({{ url('/images/mick-haupt-ehMNP0Ooj3M-unsplash.jpg') }})"
     >
         <div class="hero-overlay bg-opacity-80"></div>
         <div class="w-full">

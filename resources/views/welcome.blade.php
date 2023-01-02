@@ -1,26 +1,5 @@
 <x-guest-layout>
-    <div class="navbar bg-base-100 absolute top-0 left-0 bg-opacity-0">
-        <div class="w-full navbar-end">
-            <ul class="menu menu-horizontal px-1">
-                @guest
-                    <li>
-                        <a
-                            href="{{ route('login') }}"
-                            class="text-white underline"
-                        >Log in</a>
-                    </li>
-                    @if (Route::has('register'))
-                        <li>
-                            <a
-                                href="{{ route('register') }}"
-                                class="text-white underline"
-                            >Register</a>
-                        </li>
-                    @endif
-                @endguest
-            </ul>
-        </div>
-    </div>
+    <x-guest-navigation />
     <div
         class="hero min-h-screen"
         style="background-image:url({{ url('/images/clay-banks-fEVaiLwWvlU-unsplash.jpg') }})"
@@ -29,7 +8,7 @@
         <div class="hero-content text-center text-white">
             <div class="max-w-lg">
                 <x-jet-application-logo />
-                <p class="mt-3 mb-12 max-w-sm">
+                <p class="mt-6 mb-12 max-w-sm">
                     Track your favorite artists and we'll let you know when their next album drops!
                 </p>
                 <a
@@ -51,6 +30,13 @@
                             class="h-12"
                         />
                     </a>
+                </div>
+
+                <div class="mt-12">
+                    <a
+                        href="{{ route('privacy-policy') }}"
+                        class="text-white font-bold"
+                    >Privacy Policy</a>
                 </div>
             </div>
         </div>

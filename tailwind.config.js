@@ -14,6 +14,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Alata', ...defaultTheme.fontFamily.sans],
             },
+            spacing: {
+                '100': '25rem',
+            }
         },
     },
 

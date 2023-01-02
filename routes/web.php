@@ -30,6 +30,13 @@ Route::get('/', function () {
 })->name('welcome');
 
 /**
+ * Privacy Policy
+ */
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->name('privacy-policy');
+
+/**
  * Route for logging in with Spotify
  */
 Route::get('/auth/spotify/redirect', function () {

@@ -85,16 +85,26 @@
 
                     <hr class="my-4">
 
-                    <div class="flex items-center justify-center text-sm text-gray-600 gap-1">
-                        <span>
-                            or
-                        </span>
-                        <a
-                            class="underline hover:text-gray-900"
-                            href="{{ route('register') }}"
-                        >
-                            {{ __('Register for an Account!') }}
-                        </a>
+                    <div class="flex flex-col gap-6">
+                        <h4 class="font-bold text-xl text-gray-600 text-center">Don't have an account?</h4>
+                        <div class="flex flex-col items-center justify-around text-sm text-gray-600 gap-2">
+                            <a
+                                href="{{ route('login.spotify') }}"
+                                class="btn btn-spotify flex items-center gap-1"
+                            >
+                                <x-icons.spotify />
+                                <span>{{ __('Login with Spotify') }}</span>
+                            </a>
+                            <span>
+                                or
+                            </span>
+                            <a
+                                class="underline hover:text-gray-900"
+                                href="{{ route('register') }}"
+                            >
+                                {{ __('Register for an Account!') }}
+                            </a>
+                        </div>
                     </div>
                 </form>
             </x-jet-authentication-card>

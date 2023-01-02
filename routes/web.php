@@ -1,12 +1,15 @@
 <?php
 
-use App\Http\Livewire\ArtistAlbums;
-use Illuminate\Support\Facades\Route;
+use App\Models\User;
 use App\Http\Livewire\Home;
 use App\Http\Livewire\NewReleases;
-use App\Http\Livewire\RecommendedArtists;
+use App\Http\Livewire\ArtistAlbums;
 use App\Http\Livewire\SearchArtists;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\TrackedArtists;
+use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
+use App\Http\Livewire\RecommendedArtists;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +28,35 @@ use App\Http\Livewire\TrackedArtists;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
+/**
+ * Route for logging in with Spotify
+ */
+Route::get('/auth/spotify/redirect', function () {
+    return Socialite::driver('spotify')
+        ->scopes(['user-read-email']) // Make sure we can read the user's email address
+        ->redirect();
+})->name('login.spotify');
+
+/**
+ * Route for handling the callback from logging in with Spotify
+ */
+Route::get('/auth/spotify/callback', function () {
+    $spotifyUser = Socialite::driver('spotify')->user();
+
+    $user = User::updateOrCreate([
+        'spotify_id' => $spotifyUser->id,
+        'email' => $spotifyUser->email,
+    ], [
+        'name' => $spotifyUser->name,
+        'spotify_token' => $spotifyUser->token,
+        'spotify_refresh_token' => $spotifyUser->refreshToken,
+    ]);
+
+    Auth::login($user, true);
+
+    return redirect()->route('home');
+});
 
 Route::middleware([
     'auth:sanctum',

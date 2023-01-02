@@ -1,7 +1,7 @@
 <x-mail::message>
 # Hey {{ $user->name }},
 
-Some new albums just dropped for you this week!
+Some new albums just dropped for you!
 
 @foreach ($albums as $album)
 <x-mail::panel>

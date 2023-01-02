@@ -18,6 +18,9 @@ class UserAlbumReleaseMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    // Specify the number of days to look back for album releases
+    public $days = 30;
+
     /**
      * Create a new job instance.
      *
@@ -38,7 +41,7 @@ class UserAlbumReleaseMailJob implements ShouldQueue
         // Get only albums released in the past week
         $albumsReleasedThisWeek = ArtistAlbum::query()
             ->with('artist')
-            ->where('release_date', '>=', now()->subDays(7))
+            ->where('release_date', '>=', now()->subDays($this->days))
             ->where('release_date', '<=', now())
             ->orderBy('release_date', 'asc')
             ->get();

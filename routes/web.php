@@ -44,14 +44,28 @@ Route::get('/auth/spotify/redirect', function () {
 Route::get('/auth/spotify/callback', function () {
     $spotifyUser = Socialite::driver('spotify')->user();
 
-    $user = User::updateOrCreate([
-        'spotify_id' => $spotifyUser->id,
-        'email' => $spotifyUser->email,
-    ], [
-        'name' => $spotifyUser->name,
-        'spotify_token' => $spotifyUser->token,
-        'spotify_refresh_token' => $spotifyUser->refreshToken,
-    ]);
+    // Check to see if this user already exists
+    $user = User::query()
+        ->where('spotify_id', $spotifyUser->id)
+        ->orWhere('email', $spotifyUser->email)
+        ->first();
+
+    // If user exists, update their information from spotify, otherwise create a new account
+    if ($user) {
+        $user->update([
+            'name' => $spotifyUser->name,
+            'spotify_token' => $spotifyUser->token,
+            'spotify_refresh_token' => $spotifyUser->refreshToken,
+        ]);
+    } else {
+        $user = User::create([
+            'name' => $spotifyUser->name,
+            'email' => $spotifyUser->email,
+            'spotify_id' => $spotifyUser->id,
+            'spotify_token' => $spotifyUser->token,
+            'spotify_refresh_token' => $spotifyUser->refreshToken,
+        ]);
+    }
 
     Auth::login($user);
 

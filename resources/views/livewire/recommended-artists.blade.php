@@ -12,7 +12,7 @@
     </x-header>
 
     <div>
-        @if ($results)
+        @if ($results->isNotEmpty())
             <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                 @foreach ($results as $result)
                     <livewire:components.artist-card

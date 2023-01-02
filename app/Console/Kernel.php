@@ -18,22 +18,21 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // Get artist albums
-        $schedule->job(new ArtistAlbumsJob())->everyOddHour();
+        if (app()->environment('local')) {
+            // Local testing (sail artisan schedule:work)
+            $schedule->job(new ArtistAlbumsJob())->everyMinute();
+            $schedule->job(new ArtistRelatedArtistJob())->everyMinute();
+            $schedule->job(new UserAlbumDropMailJob())->everyMinute();
+        } else {
+            // Get artist albums
+            $schedule->job(new ArtistAlbumsJob())->twiceDailyAt('08:00', '20:00');
 
-        // Get related artists
-        $schedule->job(new ArtistRelatedArtistJob())->everyTwoHours();
+            // Get related artists
+            $schedule->job(new ArtistRelatedArtistJob())->twiceDailyAt('12:00', '00:00');
 
-        // Send new album release email once per week
-        $schedule->job(new UserAlbumDropMailJob())->weeklyOn(1, '11:00');
-
-        /**
-         * Local testing
-         * Run: sail artisan schedule:work
-         */
-        $schedule->job(new ArtistAlbumsJob())->everyMinute();
-        $schedule->job(new ArtistRelatedArtistJob())->everyMinute();
-        $schedule->job(new UserAlbumDropMailJob())->everyMinute();
+            // Send new album release email once per week
+            $schedule->job(new UserAlbumDropMailJob())->weeklyOn(5, '10:00');
+        }
     }
 
     /**

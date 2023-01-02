@@ -53,7 +53,7 @@ Route::get('/auth/spotify/callback', function () {
         'spotify_refresh_token' => $spotifyUser->refreshToken,
     ]);
 
-    Auth::login($user, true);
+    Auth::login($user);
 
     return redirect()->route('home');
 });

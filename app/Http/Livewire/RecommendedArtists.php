@@ -20,7 +20,9 @@ class RecommendedArtists extends Component
     public function render()
     {
         // Get user's artists
-        $userArtists = UserArtist::select('artist_id', 'spotify_artist_id')
+        $userArtists = UserArtist::query()
+            ->select('artist_id', 'spotify_artist_id')
+            ->where('user_id', auth()->id())
             ->join('artists', 'users_artists.artist_id', '=', 'artists.id')
             ->get();
 

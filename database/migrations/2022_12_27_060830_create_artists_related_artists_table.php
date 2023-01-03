@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('artist_id')->constrained('artists')->onDelete('cascade')->onUpdate('cascade');
             $table->string('spotify_artist_id');
             $table->string('name');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('url');
             $table->timestamps();
         });

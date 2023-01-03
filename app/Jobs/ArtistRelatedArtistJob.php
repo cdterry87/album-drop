@@ -43,13 +43,26 @@ class ArtistRelatedArtistJob implements ShouldQueue
             $related = SpotifyFacade::artistRelatedArtists($artist->spotify_artist_id)->get();
 
             $relatedArtists = $related['artists'];
+
             foreach ($relatedArtists as $relatedArtist) {
+                // Make sure artist image is set
+                $artistImage = null;
+                if (
+                    is_array($relatedArtist['images'])
+                    && count($relatedArtist['images']) > 0
+                    && is_array($relatedArtist['images'][0])
+                    && isset($relatedArtist['images'][0]['url'])
+                ) {
+                    $artistImage = $relatedArtist['images'][0]['url'];
+                }
+
+                // Save artist
                 ArtistRelatedArtist::updateOrCreate([
                     'artist_id' => $artist->id,
                     'spotify_artist_id' => $relatedArtist['id'],
                 ], [
                     'name' => $relatedArtist['name'],
-                    'image' => $relatedArtist['images'][0]['url'],
+                    'image' => $artistImage,
                     'url' => $relatedArtist['external_urls']['spotify'],
                 ]);
             }

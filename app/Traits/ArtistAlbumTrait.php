@@ -31,6 +31,17 @@ trait ArtistAlbumTrait
                 $releaseDate .= '-01';
             }
 
+            // Make sure album image is set
+            $albumImage = null;
+            if (
+                is_array($album['images'])
+                && count($album['images']) > 0
+                && is_array($album['images'][0])
+                && isset($album['images'][0]['url'])
+            ) {
+                $albumImage = $album['images'][0]['url'];
+            }
+
             // Update or create the artist's album
             ArtistAlbum::updateOrCreate([
                 'artist_id' => $artistId,
@@ -39,7 +50,7 @@ trait ArtistAlbumTrait
                 'name' => $album['name'],
                 'release_date' => $releaseDate,
                 'url' => $album['external_urls']['spotify'],
-                'image' => $album['images'][0]['url'],
+                'image' => $albumImage,
                 'type' => $album['type'],
             ]);
         }

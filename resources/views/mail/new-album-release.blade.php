@@ -19,7 +19,7 @@ width="200"
 </div>
 
 <div>
-Released: {{ $album->release_date }}
+Released: {{ $album->release_date->format('F j, Y') }}
 </div>
 
 <x-mail::button :url="$album->url">

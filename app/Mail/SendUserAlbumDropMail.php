@@ -36,7 +36,7 @@ class SendUserAlbumDropMail extends Mailable
     {
         return new Envelope(
             from: new Address(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME')),
-            subject: 'New Releases Available - ' . env('APP_NAME'),
+            subject: 'New Album Drops, just for you!',
         );
     }
 
@@ -48,7 +48,7 @@ class SendUserAlbumDropMail extends Mailable
     public function content()
     {
         return new Content(
-            markdown: 'mail.new-album-release',
+            markdown: 'mail.user-album-drop',
         );
     }
 

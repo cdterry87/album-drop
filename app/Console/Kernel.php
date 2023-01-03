@@ -25,13 +25,13 @@ class Kernel extends ConsoleKernel
             $schedule->job(new UserAlbumDropMailJob())->everyMinute();
         } else {
             // Get artist albums
-            $schedule->job(new ArtistAlbumsJob())->twiceDailyAt('08:00', '20:00');
+            $schedule->job(new ArtistAlbumsJob())->hourlyAt(0);
 
             // Get related artists
-            $schedule->job(new ArtistRelatedArtistJob())->twiceDailyAt('12:00', '00:00');
+            $schedule->job(new ArtistRelatedArtistJob())->hourlyAt(30);
 
-            // Send new album release email once per week
-            $schedule->job(new UserAlbumDropMailJob())->weeklyOn(5, '10:00');
+            // Send new album release emails
+            $schedule->job(new UserAlbumDropMailJob())->dailyAt('03:00');
         }
     }
 

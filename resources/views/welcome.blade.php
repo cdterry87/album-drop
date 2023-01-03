@@ -32,7 +32,7 @@
                     </a>
                 </div>
 
-                <div class="mt-12">
+                <div class="mt-24">
                     <a
                         href="{{ route('privacy-policy') }}"
                         class="text-white font-bold"

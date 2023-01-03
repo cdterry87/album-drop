@@ -68,7 +68,7 @@
                         </label>
                     </div>
 
-                    <div class="flex items-center justify-end mt-4">
+                    <div class="flex items-center justify-center mt-4">
                         @if (Route::has('password.request'))
                             <a
                                 class="underline text-sm text-gray-600 hover:text-gray-900"
@@ -85,7 +85,7 @@
 
                     <hr class="my-4">
 
-                    <div class="flex flex-col gap-6">
+                    <div class="flex flex-col gap-6 mb-4">
                         <h4 class="font-bold text-xl text-gray-600 text-center">Don't have an account?</h4>
                         <div class="flex flex-col items-center justify-around text-sm text-gray-600 gap-2">
                             <a

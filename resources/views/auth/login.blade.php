@@ -83,10 +83,9 @@
                         </x-jet-button>
                     </div>
 
-                    <hr class="my-4">
+                    <hr class="my-6">
 
                     <div class="flex flex-col gap-6 mb-4">
-                        <h4 class="font-bold text-xl text-gray-600 text-center">Don't have an account?</h4>
                         <div class="flex flex-col items-center justify-around text-sm text-gray-600 gap-2">
                             <a
                                 href="{{ route('login.spotify') }}"

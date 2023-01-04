@@ -10,7 +10,15 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    protected $timezone = 'America/Chicago';
+    /**
+     * Get the timezone that should be used by default for scheduled tasks.
+     *
+     * @return \DateTimeZone|string|null
+     */
+    protected function scheduleTimezone()
+    {
+        return 'America/Chicago';
+    }
 
     /**
      * Define the application's command schedule.
@@ -27,16 +35,13 @@ class Kernel extends ConsoleKernel
             $schedule->job(new UserAlbumDropMailJob())->everyMinute();
         } else {
             // Get artist albums
-            $schedule->job(new ArtistAlbumsJob())->hourlyAt(30)
-                ->timezone($this->timezone);
+            $schedule->job(new ArtistAlbumsJob())->hourlyAt(30);
 
             // Get related artists
-            $schedule->job(new ArtistRelatedArtistJob())->hourlyAt(45)
-                ->timezone($this->timezone);
+            $schedule->job(new ArtistRelatedArtistJob())->hourlyAt(45);
 
             // Send new album release emails
-            $schedule->job(new UserAlbumDropMailJob())->weeklyOn(6, '3:00')
-                ->timezone($this->timezone);
+            $schedule->job(new UserAlbumDropMailJob())->weeklyOn(6, '3:00');
         }
     }
 

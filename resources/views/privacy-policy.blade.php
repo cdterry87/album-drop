@@ -1,20 +1,16 @@
 <x-guest-layout>
-    <div>
-        <x-guest-navigation />
-    </div>
-
     <div
         class="hero min-h-screen"
         style="background-image:url({{ url('/images/mick-haupt-FGrGhzaSl0s-unsplash.jpg') }})"
     >
         <div class="hero-overlay bg-opacity-80"></div>
 
-        <div class="w-full md:max-w-3xl px-6 mt-16 mb-6">
+        <div class="w-full md:max-w-3xl px-6 mb-6 mt-20 xl:mt-32">
             <div class="text-center">
                 <x-jet-authentication-card-logo class="text-white" />
             </div>
 
-            <div class="bg-base-300 text-white text-sm p-6 rounded-lg shadow-lg mt-6">
+            <div class="bg-base-300 bg-opacity-80 text-white text-sm p-6 rounded-lg shadow-lg mt-6">
                 <style>
                     .privacy-policy h1 {
                         font-size: 2rem;

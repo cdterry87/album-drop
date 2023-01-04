@@ -93,7 +93,9 @@
                         </x-jet-button>
                     </div>
 
-                    <div class="mt-8 mb-4 text-center">
+                    <hr class="my-6" />
+
+                    <div class="mb-4 text-center">
                         <a
                             href="{{ route('privacy-policy') }}"
                             class="font-bold"

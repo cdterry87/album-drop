@@ -71,6 +71,8 @@
 
 <body>
     <div class="font-sans text-gray-900 antialiased">
+        <x-guest-navigation />
+
         {{ $slot }}
     </div>
 </body>

@@ -1,4 +1,7 @@
-<div class="card w-full h-64 bg-base-300 shadow-xl image-full">
+<div
+    data-spotify-id="{{ $spotifyId }}"
+    class="card w-full h-64 bg-base-300 shadow-xl image-full"
+>
     <figure>
         <img
             src="{{ $image }}"

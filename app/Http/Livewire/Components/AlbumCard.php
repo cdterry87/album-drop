@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class AlbumCard extends Component
 {
-    public $name, $image, $artist, $url, $releaseDate, $spotifyId;
+    public $name, $image, $artist, $url, $releaseDate;
 
     public function render()
     {

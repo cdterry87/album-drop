@@ -45,8 +45,15 @@ class ArtistCard extends Component
      */
     public function untrackArtist()
     {
-        Artist::query()
+        // Find the artist's id
+        $artist = Artist::query()
             ->where('spotify_artist_id', $this->spotifyId)
+            ->first();
+
+        // Remove artist from user's tracked artists
+        UserArtist::query()
+            ->where('user_id', auth()->id())
+            ->where('artist_id', $artist->id)
             ->delete();
 
         $this->emit('refreshTrackedArtists');
@@ -55,7 +62,7 @@ class ArtistCard extends Component
     /**
      * Determine if the artist is already tracked by this user.
      */
-    protected function determineIsTracked()
+    public function determineIsTracked()
     {
         $this->isTracked = Artist::query()
             ->where('spotify_artist_id', $this->spotifyId)

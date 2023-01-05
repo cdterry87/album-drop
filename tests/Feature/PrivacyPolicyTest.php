@@ -8,15 +8,11 @@ use Tests\TestCase;
 
 class PrivacyPolicyTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
+    public function test_renders_correctly()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        // Unauthenticated version
+        $this->get('/')
+            ->assertStatus(200)
+            ->assertSee('Privacy Policy');
     }
 }

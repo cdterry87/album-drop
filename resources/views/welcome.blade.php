@@ -25,7 +25,8 @@
                     >
                         <img
                             src="{{ url('/images/Spotify_Logo_RGB_White.png') }}"
-                            alt="Spotify"
+                            alt="Spotify Logo"
+                            title="Spotify Logo"
                             class="h-12"
                         />
                     </a>

@@ -8,15 +8,35 @@
                         class="text-white underline"
                     >Log in</a>
                 </li>
-                @if (Route::has('register'))
-                    <li>
-                        <a
-                            href="{{ route('register') }}"
-                            class="text-white underline"
-                        >Register</a>
-                    </li>
-                @endif
+                <li>
+                    <a
+                        href="{{ route('register') }}"
+                        class="text-white underline"
+                    >Register</a>
+                </li>
             @endguest
+            @auth
+                <li>
+                    <a
+                        href="{{ route('home') }}"
+                        class="text-white underline"
+                    >Home</a>
+                </li>
+                <li>
+                    <form
+                        id="logout-form"
+                        action="{{ route('logout') }}"
+                        method="POST"
+                    >
+                        @csrf
+                        <a
+                            href="{{ route('logout') }}"
+                            class="text-white underline"
+                            onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                        >Logout</a>
+                    </form>
+                </li>
+            @endauth
         </ul>
     </div>
 </div>

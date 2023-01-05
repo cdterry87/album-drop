@@ -2,21 +2,33 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class WelcomeTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
+    public function test_renders_correctly()
     {
-        $response = $this->get('/');
+        // Unauthenticated version
+        $this->get('/')
+            ->assertStatus(200)
+            ->assertSee('Get Started')
+            ->assertSee('Spotify Logo')
+            ->assertSee('Privacy Policy')
+            ->assertSee('Login')
+            ->assertSee('Register');
 
-        $response->assertStatus(200);
+        // Authenticated version
+        $user = User::factory()->create();
+        $this->actingAs($user)
+            ->get('/')
+            ->assertStatus(200)
+            ->assertSee('Get Started')
+            ->assertSee('Spotify Logo')
+            ->assertSee('Privacy Policy')
+            ->assertSee('Logout')
+            ->assertSee('Home');
     }
 }

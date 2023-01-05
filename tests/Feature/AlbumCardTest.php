@@ -10,6 +10,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AlbumCardTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_renders_correctly()
     {
         Livewire::test(AlbumCard::class, [

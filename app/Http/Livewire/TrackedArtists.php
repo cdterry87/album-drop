@@ -4,11 +4,11 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\UserArtist;
-use Livewire\WithPagination;
+use App\Traits\PaginationTrait;
 
 class TrackedArtists extends Component
 {
-    use WithPagination;
+    use PaginationTrait;
 
     protected $listeners = ['refreshTrackedArtists' => '$refresh'];
 

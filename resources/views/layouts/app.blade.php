@@ -85,8 +85,11 @@
             class="drawer-toggle"
         />
         <div class="drawer-content flex flex-col">
-            <main>
-                <header class="navbar flex gap-4 justify-end px-6 py-4">
+            <main id="main">
+                <header
+                    id="navbar"
+                    class="navbar flex gap-4 justify-end px-6 py-4"
+                >
                     @auth
                         <div class="flex-none">
                             <ul class="menu menu-horizontal px-1">
@@ -228,6 +231,7 @@
     </div>
 
     @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>

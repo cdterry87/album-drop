@@ -3,6 +3,7 @@
         @php(isset($this->numberOfPaginatorsRendered[$paginator->getPageName()]) ? $this->numberOfPaginatorsRendered[$paginator->getPageName()]++ : ($this->numberOfPaginatorsRendered[$paginator->getPageName()] = 1))
 
         <nav
+            id="pagination-navigation"
             role="navigation"
             aria-label="Pagination Navigation"
             class="flex items-center justify-between"

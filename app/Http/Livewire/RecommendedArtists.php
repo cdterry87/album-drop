@@ -5,11 +5,11 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\UserArtist;
 use App\Models\ArtistRelatedArtist;
-use Livewire\WithPagination;
+use App\Traits\PaginationTrait;
 
 class RecommendedArtists extends Component
 {
-    use WithPagination;
+    use PaginationTrait;
 
     protected $listeners = ['refreshTrackedArtists' => '$refresh'];
 

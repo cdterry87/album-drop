@@ -6,12 +6,12 @@ use App\Models\Artist;
 use Livewire\Component;
 use App\Models\ArtistAlbum;
 use App\Traits\ArtistAlbumTrait;
-use Livewire\WithPagination;
+use App\Traits\PaginationTrait;
 
 class ArtistAlbums extends Component
 {
     use ArtistAlbumTrait;
-    use WithPagination;
+    use PaginationTrait;
 
     public $artistSpotifyId, $artistId, $artistName;
 

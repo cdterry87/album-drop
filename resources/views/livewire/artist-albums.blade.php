@@ -17,9 +17,7 @@
             @endforeach
         </div>
 
-        <div class="mt-6">
-            {{ $results->links() }}
-        </div>
+        <x-pagination-results :results="$results" />
     @else
         <div>
             <h3 class="text-center lg:text-left">

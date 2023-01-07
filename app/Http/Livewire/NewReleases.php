@@ -4,11 +4,11 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\ArtistAlbum;
-use Livewire\WithPagination;
+use App\Traits\PaginationTrait;
 
 class NewReleases extends Component
 {
-    use WithPagination;
+    use PaginationTrait;
 
     public $filter_days = 30;
 

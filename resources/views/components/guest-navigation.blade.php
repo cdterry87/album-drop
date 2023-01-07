@@ -1,4 +1,7 @@
-<div class="navbar bg-base-100 absolute top-0 left-0 bg-opacity-0">
+<div
+    id="guest-navigation"
+    class="navbar bg-base-100 absolute top-0 left-0 bg-opacity-0"
+>
     <div class="w-full navbar-end">
         <ul class="menu menu-horizontal px-1">
             @guest

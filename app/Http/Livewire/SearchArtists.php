@@ -4,12 +4,9 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Aerni\Spotify\Facades\SpotifyFacade;
-use Livewire\WithPagination;
 
 class SearchArtists extends Component
 {
-    use WithPagination;
-
     public $search;
     public $results;
     public $isSearchComplete = false;

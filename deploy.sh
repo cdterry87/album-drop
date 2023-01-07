@@ -2,7 +2,7 @@
 
 set -e
 
-# vendor/bin/sail phpunit
+vendor/bin/sail phpunit
 
 (git push) || true
 

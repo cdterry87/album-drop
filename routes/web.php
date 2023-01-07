@@ -77,7 +77,7 @@ Route::get('/auth/spotify/callback', function () {
     Auth::login($user);
 
     return redirect()->route('home');
-});
+})->name('callback.spotify');
 
 Route::middleware([
     'auth:sanctum',

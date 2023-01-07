@@ -17,7 +17,7 @@ class WelcomeTest extends TestCase
             ->assertSee('Get Started')
             ->assertSee('Spotify Logo')
             ->assertSee('Privacy Policy')
-            ->assertSee('Login')
+            ->assertSee('Log in')
             ->assertSee('Register');
 
         // Authenticated version

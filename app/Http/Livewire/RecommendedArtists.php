@@ -4,9 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\UserArtist;
-use Illuminate\Support\Facades\DB;
 use App\Models\ArtistRelatedArtist;
-use Illuminate\Support\Facades\Config;
 use Livewire\WithPagination;
 
 class RecommendedArtists extends Component
@@ -16,6 +14,7 @@ class RecommendedArtists extends Component
     protected $listeners = ['refreshTrackedArtists' => '$refresh'];
 
     public $search;
+    public $filter_show = 12;
 
     public function render()
     {
@@ -35,7 +34,7 @@ class RecommendedArtists extends Component
             })
             ->groupBy('spotify_artist_id') // requires config.database.connections.mysql.strict = false; otherwise without this line it shows duplicates if multiple artists are related to the same artist
             ->orderBy('name')
-            ->paginate(12);
+            ->paginate($this->filter_show);
 
         return view('livewire.recommended-artists', [
             'results' => $results

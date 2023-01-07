@@ -17,8 +17,10 @@ class ArtistRelatedArtistFactory extends Factory
      */
     public function definition()
     {
+        $artist = Artist::factory()->create();
+
         return [
-            'artist_id' => Artist::factory(),
+            'artist_id' => $artist->id,
             'spotify_artist_id' => $this->faker->uuid,
             'name' => $this->faker->words(3, true),
             'image' => $this->faker->imageUrl,

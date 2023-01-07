@@ -5,7 +5,7 @@
     >
         <select
             class="select select-bordered w-full max-w-xs"
-            wire:model="days"
+            wire:model="filter_days"
         >
             <option value="30">Past 30 Days</option>
             <option value="90">Past 90 Days</option>
@@ -16,7 +16,10 @@
     </x-header>
 
     @if ($results->isNotEmpty())
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 w-full">
+        <div
+            id="new-releases"
+            class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 w-full"
+        >
             @foreach ($results as $result)
                 <livewire:components.album-card
                     :name="$result->name"
@@ -34,7 +37,10 @@
         </div>
     @else
         <div>
-            <h3 class="text-center lg:text-left">
+            <h3
+                id="no-new-releases"
+                class="text-center lg:text-left"
+            >
                 There are no new releases at the moment. Track your favorite artists to get notified when they release
                 new music!
             </h3>

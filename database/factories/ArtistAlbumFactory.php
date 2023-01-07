@@ -17,13 +17,16 @@ class ArtistAlbumFactory extends Factory
      */
     public function definition()
     {
+        $artist = Artist::factory()->create();
+
         return [
-            'artist_id' => Artist::factory(),
+            'artist_id' => $artist->id,
             'name' => $this->faker->sentence,
             'image' => $this->faker->imageUrl,
             'url' => $this->faker->url,
             'release_date' => $this->faker->date,
             'spotify_album_id' => $this->faker->uuid,
+            'type' => 'album',
         ];
     }
 }

@@ -39,7 +39,10 @@
     <div class="text-center">
         @if ($isSearchComplete)
             @if ($results)
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                <div
+                    id="results"
+                    class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"
+                >
                     @foreach ($results as $result)
                         <livewire:components.artist-card
                             :name="$result['name']"
@@ -52,14 +55,20 @@
                 </div>
             @else
                 <div>
-                    <h3 class="font-bold lg">
+                    <h3
+                        id="no-results"
+                        class="font-bold lg"
+                    >
                         No artists were found with that name. Try a different search.
                     </h3>
                 </div>
             @endif
         @else
             <div>
-                <h3 class="font-bold lg">
+                <h3
+                    id="no-search"
+                    class="font-bold lg"
+                >
                     Search for an artist and your results will appear here.
                 </h3>
             </div>

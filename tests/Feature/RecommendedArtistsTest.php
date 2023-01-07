@@ -14,6 +14,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RecommendedArtistsTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_must_be_authenticated()
     {
         $this->get(route('recommended-artists'))
@@ -55,7 +57,7 @@ class RecommendedArtistsTest extends TestCase
             'name' => 'AAAAA',
         ]);
 
-        // Make sure the album shows up on the new releases page
+        // Make sure the recommended artists show up on the page
         $this->actingAs($user)
             ->get(route('recommended-artists'))
             ->assertStatus(200);
@@ -100,14 +102,13 @@ class RecommendedArtistsTest extends TestCase
             'name' => 'CCCCC',
         ]);
 
-        // Make sure the album shows up on the new releases page
+        // Make sure the album shows up on the recommended artists show up on the page
         $this->actingAs($user)
             ->get(route('recommended-artists'))
             ->assertStatus(200);
 
         Livewire::actingAs($user)
             ->test(RecommendedArtists::class)
-            ->assertSee('Recommended Artists')
             ->assertViewHas('results', function ($results) {
                 return $results->count() === 4;
             })

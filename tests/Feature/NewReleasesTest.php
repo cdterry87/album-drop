@@ -14,6 +14,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class NewReleasesTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_must_be_authenticated()
     {
         $this->get(route('new-releases'))

@@ -3,16 +3,32 @@
         title="Tracked Artists"
         subtitle="You will receive notifications when your tracked artists below release new albums."
     >
-        <div class="flex items-center gap-2">
-            <x-inputs.text
-                placeholder="Search your tracked artists..."
-                wire:model.debounce.500ms="search"
-            />
+        <div class="flex flex-col sm:flex-row items-center gap-2">
+            <div class="w-full sm:w-auto">
+                <select
+                    class="select select-bordered w-full"
+                    wire:model="filter_show"
+                >
+                    <option value="12">Show 12</option>
+                    <option value="36">Show 36</option>
+                    <option value="60">Show 60</option>
+                    <option value="96">Show 96</option>
+                </select>
+            </div>
+            <div class="w-full sm:w-auto">
+                <x-inputs.text
+                    placeholder="Search recommended artists..."
+                    wire:model.debounce.500ms="search"
+                />
+            </div>
         </div>
     </x-header>
 
     @if ($results->isNotEmpty())
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 w-full">
+        <div
+            id="tracked-artists"
+            class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 w-full"
+        >
             @foreach ($results as $result)
                 <livewire:components.artist-card
                     :name="$result->name"
@@ -30,7 +46,10 @@
         </div>
     @else
         <div>
-            <h3 class="text-center lg:text-left">
+            <h3
+                id="no-tracked-artists"
+                class="text-center lg:text-left"
+            >
                 You are not tracking any artists. <a
                     href="{{ route('search-artists') }}"
                     class="underline"

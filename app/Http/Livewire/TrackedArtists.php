@@ -13,6 +13,7 @@ class TrackedArtists extends Component
     protected $listeners = ['refreshTrackedArtists' => '$refresh'];
 
     public $search;
+    public $filter_show = 12;
 
     public function render()
     {
@@ -24,7 +25,7 @@ class TrackedArtists extends Component
                 $query->where('artists.name', 'like', "%{$this->search}%");
             })
             ->orderBy('artists.name')
-            ->paginate(12);
+            ->paginate($this->filter_show);
 
         return view('livewire.tracked-artists', [
             'results' => $results,

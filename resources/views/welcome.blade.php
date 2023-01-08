@@ -16,21 +16,8 @@
                     href="{{ route('home') }}"
                 >Get Started!
                 </a>
-                <div class="text-white mt-12">
-                    Powered by
-                    <br>
-                    <a
-                        href="https://spotify.com"
-                        class="text-white underline mt-2 inline-block"
-                    >
-                        <img
-                            src="{{ url('/images/Spotify_Logo_RGB_White.png') }}"
-                            alt="Spotify Logo"
-                            title="Spotify Logo"
-                            class="h-12"
-                        />
-                    </a>
-                </div>
+
+                <x-spotify-logo class="mt-12" />
 
                 <div class="mt-16">
                     <a

@@ -226,6 +226,11 @@
                         </a>
                     </li>
                 </ul>
+
+                <x-spotify-logo
+                    class="mt-12 px-6"
+                    image-height="h-8"
+                />
             </div>
         </div>
     </div>

@@ -77,7 +77,10 @@
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased">
+<body
+    class="font-sans antialiased"
+    style="visibility: hidden;"
+>
     <div class="drawer drawer-mobile">
         <input
             id="sidebar"
@@ -237,6 +240,8 @@
 
     @livewireScripts
     @stack('scripts')
+
+    <x-dom-ready-script />
 </body>
 
 </html>

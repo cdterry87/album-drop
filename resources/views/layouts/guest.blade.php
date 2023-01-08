@@ -78,6 +78,8 @@
 
         {{ $slot }}
     </div>
+
+    <x-scripts.dom-ready />
 </body>
 
 </html>

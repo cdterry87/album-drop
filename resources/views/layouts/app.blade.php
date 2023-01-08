@@ -241,7 +241,7 @@
     @livewireScripts
     @stack('scripts')
 
-    <x-dom-ready-script />
+    <x-scripts.dom-ready />
 </body>
 
 </html>

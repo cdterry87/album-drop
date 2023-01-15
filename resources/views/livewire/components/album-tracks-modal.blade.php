@@ -6,7 +6,10 @@
         wire:model="isModalShown"
     />
     <div class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box bg-base-300">
+        <div
+            id="album-tracks"
+            class="modal-box bg-base-300"
+        >
             @if ($results)
                 <div class="flex items-start justify-between gap-4">
                     <div>
@@ -51,9 +54,21 @@
                     </table>
                 </div>
             @else
-                <h3 class="text-center lg:text-left">
+                <h3
+                    id="no-album-tracks"
+                    class="text-center lg:text-left"
+                >
                     Sorry, we don't have any track data for this album at the moment. Check back later for updates!
                 </h3>
+
+                <div class="modal-action mt-6">
+                    <button
+                        class="btn"
+                        wire:click.prevent="closeModal"
+                    >
+                        Close
+                    </button>
+                </div>
             @endif
         </div>
     </div>

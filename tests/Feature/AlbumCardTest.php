@@ -20,11 +20,26 @@ class AlbumCardTest extends TestCase
             'artist' => 'Artist Name',
             'url' => 'https://example.com',
             'releaseDate' => new \DateTime('2023-01-01'),
+            'spotifyId' => '12345'
         ])
             ->assertSee('Album Name')
             ->assertSee('image.jpeg')
             ->assertSee('Artist Name')
             ->assertSee('https://example.com')
             ->assertSee('January 1, 2023');
+    }
+
+    public function test_view_tracks()
+    {
+        Livewire::test(AlbumCard::class, [
+            'name' => 'Album Name',
+            'image' => 'image.jpeg',
+            'artist' => 'Artist Name',
+            'url' => 'https://example.com',
+            'releaseDate' => new \DateTime('2023-01-01'),
+            'spotifyId' => '12345'
+        ])
+            ->call('viewTracks')
+            ->assertEmitted('viewTracks');
     }
 }

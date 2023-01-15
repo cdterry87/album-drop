@@ -16,7 +16,10 @@ module.exports = {
             },
             spacing: {
                 '100': '25rem',
-            }
+            },
+            colors: {
+                'spotify': '#1DB954',
+            },
         },
     },
 

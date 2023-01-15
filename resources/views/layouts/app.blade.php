@@ -144,7 +144,7 @@
                         for="sidebar"
                         class="drawer-overlay cursor-pointer lg:hidden"
                     >
-                        <x-icons.close />
+                        <x-icons.menu />
                     </label>
                 </header>
 
@@ -166,20 +166,7 @@
                     for="sidebar"
                     class="drawer-overlay cursor-pointer absolute top-6 right-6 lg:hidden"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="w-8 h-8"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                    </svg>
+                    <x-icons.close />
                 </label>
                 <hr class=" mt-6 mb-4 border-gray-600">
                 <ul>

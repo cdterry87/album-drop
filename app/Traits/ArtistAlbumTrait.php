@@ -55,4 +55,12 @@ trait ArtistAlbumTrait
             ]);
         }
     }
+
+    /**
+     * Get album tracks
+     */
+    public function getAlbumTracks($spotifyId)
+    {
+        return SpotifyFacade::albumTracks($spotifyId)->get();
+    }
 }

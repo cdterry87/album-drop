@@ -25,7 +25,16 @@
             @endif
             <h4 class="text-xs pt-2">Released: {{ $releaseDate->format('F j, Y') }}</h4>
         </div>
-        <div class="card-actions justify-end">
+        <div class="card-actions justify-end gap-3">
+            <label
+                for="album-tracks--modal"
+                class="btn btn-accent"
+                title="View Tracks"
+                alt="View Tracks"
+                wire:click.prevent="viewTracks"
+            >
+                <x-icons.tracks />
+            </label>
             <a
                 href="{{ $url }}"
                 class="btn btn-spotify"

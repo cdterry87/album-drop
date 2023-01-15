@@ -12,12 +12,15 @@
                     :release-date="$result->release_date"
                     :image="$result->image"
                     :url="$result->url"
+                    :spotify-id="$result->spotify_album_id"
                     wire:key="{{ $result->spotify_album_id }}"
                 />
             @endforeach
         </div>
 
         <x-pagination-results :results="$results" />
+
+        <livewire:components.album-tracks-modal />
     @else
         <div>
             <h3 class="text-center lg:text-left">

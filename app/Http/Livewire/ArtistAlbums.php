@@ -39,7 +39,7 @@ class ArtistAlbums extends Component
         $results = ArtistAlbum::query()
             ->where('artist_id', $this->artistId)
             ->orderBy('release_date', 'desc')
-            ->paginate(12);
+            ->paginate(30);
 
         // If artist currently has no albums in the system, get them from Spotify and save them to the database
         if ($results->isEmpty()) {
@@ -49,7 +49,7 @@ class ArtistAlbums extends Component
             $results = ArtistAlbum::query()
                 ->where('artist_id', $this->artistId)
                 ->orderBy('release_date', 'desc')
-                ->paginate(12);
+                ->paginate(30);
         }
 
         return $results;

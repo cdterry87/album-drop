@@ -3,16 +3,31 @@
         title="New Releases"
         subtitle="Check out the latest releases from your tracked artists!"
     >
-        <select
-            class="select select-bordered w-full max-w-xs"
-            wire:model="filter_days"
-        >
-            <option value="30">Past 30 Days</option>
-            <option value="90">Past 90 Days</option>
-            <option value="180">Past 180 Days</option>
-            <option value="365">Past 365 Days</option>
-            <option value="">All Time</option>
-        </select>
+        <div class="flex flex-col sm:flex-row items-center gap-2">
+            <div class="w-full sm:w-auto">
+                <select
+                    class="select select-bordered w-full"
+                    wire:model="filter_show"
+                >
+                    <option value="30">Show 30</option>
+                    <option value="60">Show 60</option>
+                    <option value="90">Show 90</option>
+                    <option value="120">Show 120</option>
+                </select>
+            </div>
+            <div class="w-full sm:w-auto">
+                <select
+                    class="select select-bordered w-full max-w-xs"
+                    wire:model="filter_days"
+                >
+                    <option value="30">Past 30 Days</option>
+                    <option value="90">Past 90 Days</option>
+                    <option value="180">Past 180 Days</option>
+                    <option value="365">Past 365 Days</option>
+                    <option value="">All Time</option>
+                </select>
+            </div>
+        </div>
     </x-header>
 
     @if ($results->isNotEmpty())

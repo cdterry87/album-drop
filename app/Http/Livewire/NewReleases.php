@@ -11,6 +11,7 @@ class NewReleases extends Component
     use PaginationTrait;
 
     public $filter_days = 30;
+    public $filter_show = 30;
 
     public function render()
     {
@@ -26,7 +27,7 @@ class NewReleases extends Component
                     ->pluck('artist_id');
             })
             ->orderBy('release_date', 'desc')
-            ->paginate(12);
+            ->paginate($this->filter_show);
 
         return view('livewire.new-releases', [
             'results' => $results

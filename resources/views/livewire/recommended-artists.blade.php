@@ -9,10 +9,10 @@
                     class="select select-bordered w-full"
                     wire:model="filter_show"
                 >
-                    <option value="12">Show 12</option>
-                    <option value="36">Show 36</option>
+                    <option value="30">Show 30</option>
                     <option value="60">Show 60</option>
-                    <option value="96">Show 96</option>
+                    <option value="90">Show 90</option>
+                    <option value="120">Show 120</option>
                 </select>
             </div>
             <div class="w-full sm:w-auto">

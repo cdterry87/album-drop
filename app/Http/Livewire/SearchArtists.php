@@ -29,7 +29,7 @@ class SearchArtists extends Component
 
         // Use the Spotify facade to search for artists
         $results = SpotifyFacade::searchArtists($this->search)
-            ->limit(12)
+            ->limit(30)
             ->get();
 
         // Set the results to the artist items

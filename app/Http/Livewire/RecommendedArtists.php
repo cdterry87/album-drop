@@ -14,7 +14,7 @@ class RecommendedArtists extends Component
     protected $listeners = ['refreshTrackedArtists' => '$refresh'];
 
     public $search;
-    public $filter_show = 12;
+    public $filter_show = 30;
 
     public function render()
     {

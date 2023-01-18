@@ -49,8 +49,6 @@
         </div>
 
         <x-pagination-results :results="$results" />
-
-        <livewire:components.album-tracks-modal />
     @else
         <div>
             <h3

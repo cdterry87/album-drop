@@ -61,6 +61,8 @@ trait ArtistAlbumTrait
      */
     public function getAlbumTracks($spotifyId)
     {
-        return SpotifyFacade::albumTracks($spotifyId)->get();
+        $tracks = SpotifyFacade::albumTracks($spotifyId)->get();
+
+        return $tracks['items'];
     }
 }

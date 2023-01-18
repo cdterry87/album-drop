@@ -26,22 +26,21 @@
             <h4 class="text-xs pt-2">Released: {{ $releaseDate->format('F j, Y') }}</h4>
         </div>
         <div class="card-actions justify-end gap-3">
-            <label
-                for="album-tracks--modal"
+            <a
+                href="{{ route('album-tracks', $spotifyId) }}"
                 class="btn btn-accent"
                 title="View Tracks"
                 alt="View Tracks"
-                wire:click.prevent="viewTracks"
             >
                 <x-icons.tracks />
-            </label>
-            <a
-                href="{{ $url }}"
-                class="btn btn-spotify"
-                target="_blank"
-            >
-                <x-icons.spotify />
-            </a>
+                </label>
+                <a
+                    href="{{ $url }}"
+                    class="btn btn-spotify"
+                    target="_blank"
+                >
+                    <x-icons.spotify />
+                </a>
         </div>
     </div>
 </div>

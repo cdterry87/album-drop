@@ -15,9 +15,4 @@ class AlbumCard extends Component
     {
         return view('livewire.components.album-card');
     }
-
-    public function viewTracks()
-    {
-        $this->emit('viewTracks', $this->spotifyId, $this->name, $this->releaseDate);
-    }
 }

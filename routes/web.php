@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Http\Livewire\Home;
+use App\Http\Livewire\AlbumTracks;
 use App\Http\Livewire\NewReleases;
 use App\Http\Livewire\ArtistAlbums;
 use App\Http\Livewire\SearchArtists;
@@ -107,6 +108,12 @@ Route::middleware([
      */
     Route::get('artist-albums/{artistSpotifyId}', ArtistAlbums::class)
         ->name('artist-albums');
+
+    /**
+     * Album Tracks
+     */
+    Route::get('album-tracks/{albumSpotifyId}', AlbumTracks::class)
+        ->name('album-tracks');
 
     /**
      * Recommended Artists (based on tracked artists)

@@ -5,7 +5,10 @@
     />
 
     @if ($results->isNotEmpty())
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 w-full">
+        <div
+            id="artist-albums"
+            class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 w-full"
+        >
             @foreach ($results as $result)
                 <livewire:components.album-card
                     :name="$result->name"
@@ -19,11 +22,12 @@
         </div>
 
         <x-pagination-results :results="$results" />
-
-        <livewire:components.album-tracks-modal />
     @else
         <div>
-            <h3 class="text-center lg:text-left">
+            <h3
+                id="no-artist-albums"
+                class="text-center lg:text-left"
+            >
                 Sorry, we don't have any album data for this artist at the moment. Check back later for updates!
             </h3>
         </div>

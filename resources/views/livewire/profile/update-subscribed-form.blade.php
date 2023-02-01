@@ -1,10 +1,10 @@
-<x-jet-form-section submit="updateSubscribed">
+<x-jet-form-section submit="updateSettings">
     <x-slot name="title">
-        {{ __('Notifications Settings') }}
+        {{ __('Account Settings') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Enable notifications to receive an email when your tracked artists drop a new album.') }}
+        {{ __('Enable notifications to receive an email when your tracked artists drop a new album. Album Drop can also create a playlist for you on Spotify based on your tracked artists if you link your Spotify account.') }}
     </x-slot>
 
     <x-slot name="form">
@@ -20,20 +20,28 @@
                 />
             </div>
         </div>
+        @if ($spotify_id)
+            <div class="flex items-center gap-2 col-span-6">
+                <x-jet-checkbox
+                    wire:model="create_playlist"
+                    id="create_playlist"
+                />
+                <div>
+                    <x-jet-label
+                        for="create_playlist"
+                        value="{{ __('I would like Album Drop to create a curated playlist for me on Spotify based on my tracked artists.') }}"
+                    />
+                </div>
+            </div>
+        @endif
     </x-slot>
 
     <x-slot name="actions">
         <x-jet-action-message
             class="mr-3"
-            on="subscribed"
+            on="settingsUpdated"
         >
-            {{ __('You are now subscribed!') }}
-        </x-jet-action-message>
-        <x-jet-action-message
-            class="mr-3"
-            on="unsubscribed"
-        >
-            {{ __('You have unsubscribed successfully.') }}
+            {{ __('Your settings have been saved!') }}
         </x-jet-action-message>
         <x-jet-button
             wire:loading.attr="disabled"

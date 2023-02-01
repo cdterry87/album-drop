@@ -42,7 +42,13 @@ Route::get('/privacy-policy', function () {
  */
 Route::get('/auth/spotify/redirect', function () {
     return Socialite::driver('spotify')
-        ->scopes(['user-read-email']) // Make sure we can read the user's email address
+        ->scopes([
+            'user-read-email',          // Make sure we can read the user's email address
+            'playlist-modify-public',   // Make sure we can create and add to user's public playlists
+            'playlist-modify-private',  // Make sure we can create and add to user's private playlists
+            'user-follow-read',         // Make sure we can read the user's followed artists
+            'user-follow-modify'        // Make sure we can update the user's followed artists
+        ])
         ->redirect();
 })->name('login.spotify');
 
@@ -62,6 +68,7 @@ Route::get('/auth/spotify/callback', function () {
     if ($user) {
         $user->update([
             'name' => $spotifyUser->name,
+            'spotify_id' => $spotifyUser->id,
             'spotify_token' => $spotifyUser->token,
             'spotify_refresh_token' => $spotifyUser->refreshToken,
         ]);

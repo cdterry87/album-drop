@@ -90,4 +90,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserAlbumDrop::class);
     }
+
+    public function playlistTracks()
+    {
+        return $this->hasMany(UserPlaylistTrack::class);
+    }
 }

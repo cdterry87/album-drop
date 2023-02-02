@@ -3,8 +3,10 @@
 namespace App\Console;
 
 use App\Jobs\ArtistAlbumsJob;
+use App\Jobs\ArtistAlbumTracksJob;
 use App\Jobs\UserAlbumDropMailJob;
 use App\Jobs\ArtistRelatedArtistJob;
+use App\Jobs\UserPlaylistManagerJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -31,14 +33,22 @@ class Kernel extends ConsoleKernel
         if (app()->environment('local')) {
             // Local testing (sail artisan schedule:work)
             $schedule->job(new ArtistAlbumsJob())->everyMinute();
+            $schedule->job(new ArtistAlbumTracksJob())->everyMinute();
             $schedule->job(new ArtistRelatedArtistJob())->everyMinute();
             $schedule->job(new UserAlbumDropMailJob())->everyMinute();
+            $schedule->job(new UserPlaylistManagerJob())->everyMinute();
         } else {
             // Get artist albums
-            $schedule->job(new ArtistAlbumsJob())->hourlyAt(30);
+            $schedule->job(new ArtistAlbumsJob())->hourlyAt(0);
+
+            // Get artist album tracks
+            $schedule->job(new ArtistAlbumTracksJob())->hourlyAt(15);
 
             // Get related artists
-            $schedule->job(new ArtistRelatedArtistJob())->hourlyAt(45);
+            $schedule->job(new ArtistRelatedArtistJob())->hourlyAt(30);
+
+            // Manage user playlists
+            $schedule->job(new UserPlaylistManagerJob())->hourlyAt(45);
 
             // Send new album release emails
             $schedule->job(new UserAlbumDropMailJob())->weeklyOn(6, '3:00');

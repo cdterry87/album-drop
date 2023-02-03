@@ -7,10 +7,12 @@ use App\Models\User;
 use Livewire\Livewire;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Http\Livewire\Profile\UpdateSubscribedForm;
+use App\Http\Livewire\Profile\UpdateSettingsForm;
 
-class UpdateSubscribedFormTest extends TestCase
+class UpdateSettingsFormTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_must_be_authenticated()
     {
         $this->get(route('profile.show'))
@@ -23,7 +25,7 @@ class UpdateSubscribedFormTest extends TestCase
         $this->actingAs($user)
             ->get(route('profile.show'))
             ->assertStatus(200)
-            ->assertSee('Notifications Settings');
+            ->assertSee('Account Settings');
     }
 
     public function test_can_update_subscribed()
@@ -31,10 +33,10 @@ class UpdateSubscribedFormTest extends TestCase
         $user = User::factory()->create();
 
         Livewire::actingAs($user)
-            ->test(UpdateSubscribedForm::class)
+            ->test(UpdateSettingsForm::class)
             ->set('subscribed', true)
-            ->call('updateSubscribed')
-            ->assertEmitted('subscribed');
+            ->call('updateSettings')
+            ->assertEmitted('settingsUpdated');
 
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
@@ -42,10 +44,10 @@ class UpdateSubscribedFormTest extends TestCase
         ]);
 
         Livewire::actingAs($user)
-            ->test(UpdateSubscribedForm::class)
+            ->test(UpdateSettingsForm::class)
             ->set('subscribed', false)
-            ->call('updateSubscribed')
-            ->assertEmitted('unsubscribed');
+            ->call('updateSettings')
+            ->assertEmitted('settingsUpdated');
 
         $this->assertDatabaseHas('users', [
             'id' => $user->id,

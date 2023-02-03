@@ -3,14 +3,12 @@
 namespace App\Http\Livewire\Profile;
 
 use App\Models\User;
-use GuzzleHttp\Client;
 use Livewire\Component;
 use SpotifyWebAPI\Session;
 use SpotifyWebAPI\SpotifyWebAPI;
-use Aerni\Spotify\SpotifyRequest;
 use Aerni\Spotify\Facades\SpotifyFacade;
 
-class UpdateSubscribedForm extends Component
+class UpdateSettingsForm extends Component
 {
     public $subscribed = false;
     public $create_playlist = false;
@@ -27,7 +25,7 @@ class UpdateSubscribedForm extends Component
 
     public function render()
     {
-        return view('livewire.profile.update-subscribed-form');
+        return view('livewire.profile.update-settings-form');
     }
 
     public function updateSettings()

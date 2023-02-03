@@ -13,7 +13,7 @@
                 <x-jet-section-border />
             @endif
 
-            @livewire('profile.update-subscribed-form')
+            @livewire('profile.update-settings-form')
 
             <x-jet-section-border />
 

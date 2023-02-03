@@ -32,26 +32,26 @@ class Kernel extends ConsoleKernel
     {
         if (app()->environment('local')) {
             // Local testing (sail artisan schedule:work)
+            $schedule->job(new UserPlaylistManagerJob())->everyMinute();
             $schedule->job(new ArtistAlbumsJob())->everyMinute();
             $schedule->job(new ArtistAlbumTracksJob())->everyMinute();
             $schedule->job(new ArtistRelatedArtistJob())->everyMinute();
             $schedule->job(new UserAlbumDropMailJob())->everyMinute();
-            $schedule->job(new UserPlaylistManagerJob())->everyMinute();
         } else {
+            // Manage user playlists
+            $schedule->job(new UserPlaylistManagerJob())->twiceDailyAt(1, 13);
+
             // Get artist albums
-            $schedule->job(new ArtistAlbumsJob())->hourlyAt(0);
+            $schedule->job(new ArtistAlbumsJob())->dailyAt('02:00');
 
             // Get artist album tracks
-            $schedule->job(new ArtistAlbumTracksJob())->hourlyAt(15);
+            $schedule->job(new ArtistAlbumTracksJob())->dailyAt('03:00');
 
             // Get related artists
-            $schedule->job(new ArtistRelatedArtistJob())->hourlyAt(30);
-
-            // Manage user playlists
-            $schedule->job(new UserPlaylistManagerJob())->hourlyAt(45);
+            $schedule->job(new ArtistRelatedArtistJob())->dailyAt('04:00');
 
             // Send new album release emails
-            $schedule->job(new UserAlbumDropMailJob())->weeklyOn(6, '3:00');
+            $schedule->job(new UserAlbumDropMailJob())->weeklyOn(6, '5:00');
         }
     }
 

@@ -20,7 +20,7 @@ class AlbumTracks extends Component
         $this->albumSpotifyId = $albumSpotifyId;
 
         $album = ArtistAlbum::query()
-            ->with('artist')
+            ->with(['artist', 'tracks'])
             ->where('spotify_album_id', $albumSpotifyId)
             ->first();
 
@@ -30,7 +30,7 @@ class AlbumTracks extends Component
             $this->albumUrl = $album->url;
             $this->albumImage = $album->image;
             $this->albumReleaseDate = $album->release_date;
-            $this->albumTracks = $this->getAlbumTracks($albumSpotifyId);
+            $this->albumTracks = $album->tracks;
         }
     }
 

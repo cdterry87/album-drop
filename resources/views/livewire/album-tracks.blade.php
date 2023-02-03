@@ -29,12 +29,12 @@
                         <tbody>
                             @foreach ($albumTracks as $track)
                                 <tr class="h-12">
-                                    <td>{{ $track['track_number'] }}</td>
+                                    <td>{{ $track->track_number }}</td>
                                     <td class="w-full">
-                                        {{ $track['name'] }}
+                                        {{ $track->name }}
                                     </td>
                                     <td>
-                                        {{-- @todo --}}
+                                        {{ $track->duration_ms ? gmdate('i:s', $track->duration_ms / 1000) : 'N/A' }}
                                     </td>
                                 </tr>
                             @endforeach

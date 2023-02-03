@@ -35,13 +35,13 @@ class ArtistAlbumTracksJob implements ShouldQueue
     {
         // Get all albums that haven't been imported yet
         $albums = ArtistAlbum::distinct()
-            ->select('id', 'artist_id', 'spotify_album_id')
+            ->select('id', 'artist_id', 'name', 'spotify_album_id')
             ->where('imported', false)
-            ->inRandomOrder()
             ->get();
 
         foreach ($albums as $album) {
             $albumId = $album->id;
+            $albumName = $album->name;
             $artistId = $album->artist_id;
             $albumSpotifyId = $album->spotify_album_id;
 
@@ -59,8 +59,8 @@ class ArtistAlbumTracksJob implements ShouldQueue
                 ArtistAlbumTrack::updateOrCreate([
                     'artist_id' => $artistId,
                     'album_id' => $albumId,
-                ], [
                     'spotify_track_id' => $trackId,
+                ], [
                     'name' => $trackName,
                     'track_number' => $trackNumber,
                     'duration_ms' => $trackDuration,

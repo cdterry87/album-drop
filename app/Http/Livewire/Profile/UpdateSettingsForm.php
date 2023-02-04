@@ -7,9 +7,12 @@ use Livewire\Component;
 use SpotifyWebAPI\Session;
 use SpotifyWebAPI\SpotifyWebAPI;
 use Aerni\Spotify\Facades\SpotifyFacade;
+use App\Traits\SpotifyTrait;
 
 class UpdateSettingsForm extends Component
 {
+    use SpotifyTrait;
+
     public $subscribed = false;
     public $create_playlist = false;
     public $spotify_id = null;
@@ -55,30 +58,9 @@ class UpdateSettingsForm extends Component
 
     public function createPlaylist()
     {
-        // @todo - this logic is in the spotify trait. use that instead of duplicating it here
-
         $user = auth()->user();
 
-        $session = new Session(
-            env('SPOTIFY_CLIENT_ID'),
-            env('SPOTIFY_CLIENT_SECRET'),
-            env('SPOTIFY_REDIRECT_URI')
-        );
-
-        $options = [
-            'auto_refresh' => true,
-        ];
-
-        $session->refreshAccessToken($user->spotify_refresh_token);
-        $accessToken = $session->getAccessToken();
-        $session->setAccessToken($accessToken);
-
-        $api = new SpotifyWebAPI($options, $session);
-        $api->setSession($session);
-        $api->me();
-
-        $newAccessToken = $session->getAccessToken();
-        $newRefreshToken = $session->getRefreshToken();
+        $api = $this->createSpotifySession($user);
 
         // Create the playlist
         $playlist = $api->createPlaylist([
@@ -87,10 +69,8 @@ class UpdateSettingsForm extends Component
             'public' => false,
         ]);
 
-        // Update the user's access and refresh tokens and save the created playlist id
+        // Add the created playlist to the user's account
         $user->spotify_playlist_id = $playlist->id;
-        $user->spotify_token = $newAccessToken;
-        $user->spotify_refresh_token = $newRefreshToken;
         $user->save();
     }
 }

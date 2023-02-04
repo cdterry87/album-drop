@@ -55,6 +55,8 @@ class UpdateSettingsForm extends Component
 
     public function createPlaylist()
     {
+        // @todo - this logic is in the spotify trait. use that instead of duplicating it here
+
         $user = auth()->user();
 
         $session = new Session(

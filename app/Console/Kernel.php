@@ -39,7 +39,8 @@ class Kernel extends ConsoleKernel
             $schedule->job(new UserAlbumDropMailJob())->everyMinute();
         } else {
             // Manage user playlists
-            $schedule->job(new UserPlaylistManagerJob())->twiceDailyAt(1, 13);
+            // $schedule->job(new UserPlaylistManagerJob())->twiceDailyAt(1, 13);
+            $schedule->job(new UserPlaylistManagerJob())->hourly();
 
             // Get artist albums
             $schedule->job(new ArtistAlbumsJob())->dailyAt('02:00');

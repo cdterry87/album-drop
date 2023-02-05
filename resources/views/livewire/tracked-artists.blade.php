@@ -24,6 +24,32 @@
         </div>
     </x-header>
 
+    @if (session()->has('sync-message'))
+        <div
+            id="sync--alert"
+            class="alert alert-success shadow-lg my-4"
+        >
+            <div class="flex flex-col md:flex-row items-center gap-4">
+                <x-icons.check />
+                <span>
+                    {{ session('sync-message') }}
+                </span>
+            </div>
+        </div>
+    @elseif(session()->has('no-sync-message'))
+        <div
+            id="no-sync--alert"
+            class="alert alert-warning shadow-lg my-4"
+        >
+            <div class="flex flex-col md:flex-row items-center gap-4">
+                <x-icons.warning />
+                <span>
+                    {{ session('no-sync-message') }}
+                </span>
+            </div>
+        </div>
+    @endif
+
     @if ($results->isNotEmpty())
         <div
             id="tracked-artists"

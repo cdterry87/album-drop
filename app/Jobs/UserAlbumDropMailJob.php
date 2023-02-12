@@ -58,7 +58,7 @@ class UserAlbumDropMailJob implements ShouldQueue
                 ->artists
                 ->pluck('id');
 
-            // Check if any of the albums released this week are by one of the user's tracked artists and not in the album release mail log
+            // Check if any of the albums released recently are by one of the user's tracked artists and not in the album release mail log
             $usersAlbumsReleasedRecently = $albumsReleasedRecently
                 ->whereIn('artist_id', $userArtistsIds)
                 ->whereNotIn('id', $user->albumDrops->pluck('album_id'));

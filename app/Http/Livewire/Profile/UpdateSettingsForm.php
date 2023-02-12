@@ -4,8 +4,6 @@ namespace App\Http\Livewire\Profile;
 
 use App\Models\User;
 use Livewire\Component;
-use SpotifyWebAPI\Session;
-use SpotifyWebAPI\SpotifyWebAPI;
 use Aerni\Spotify\Facades\SpotifyFacade;
 use App\Traits\SpotifyTrait;
 
@@ -14,7 +12,8 @@ class UpdateSettingsForm extends Component
     use SpotifyTrait;
 
     public $subscribed = false;
-    public $create_playlist = false;
+    public $create_mega_playlist = false;
+    public $create_new_releases_playlist = false;
     public $spotify_id = null;
 
     public function mount()
@@ -22,7 +21,8 @@ class UpdateSettingsForm extends Component
         $user = auth()->user();
 
         $this->subscribed = $user->subscribed;
-        $this->create_playlist = $user->create_playlist;
+        $this->create_mega_playlist = $user->create_mega_playlist;
+        $this->create_new_releases_playlist = $user->create_new_releases_playlist;
         $this->spotify_id = $user->spotify_id;
     }
 
@@ -37,19 +37,33 @@ class UpdateSettingsForm extends Component
 
         User::where('id', $user->id)->update([
             'subscribed' => $this->subscribed,
-            'create_playlist' => $this->create_playlist,
+            'create_mega_playlist' => $this->create_mega_playlist,
+            'create_new_releases_playlist' => $this->create_new_releases_playlist,
         ]);
 
-        if ($this->create_playlist) {
+        if ($this->create_mega_playlist) {
             // Check if user already has a Spotify playlist attached to their account and if it exists on Spotify
             $playlist = null;
-            if ($user && $user->spotify_playlist_id) {
-                $playlist = SpotifyFacade::playlist($user->spotify_playlist_id)->get();
+            if ($user && $user->spotify_mega_playlist_id) {
+                $playlist = SpotifyFacade::playlist($user->spotify_mega_playlist_id)->get();
             }
 
             // If a playlist doesn't exist, create one
             if (!$playlist) {
                 $this->createPlaylist();
+            }
+        }
+
+        if ($this->create_new_releases_playlist) {
+            // Check if user already has a Spotify playlist attached to their account and if it exists on Spotify
+            $albumDropsPlaylist = null;
+            if ($user && $user->spotify_new_releases_playlist_id) {
+                $albumDropsPlaylist = SpotifyFacade::playlist($user->spotify_new_releases_playlist_id)->get();
+            }
+
+            // If a playlist doesn't exist, create one
+            if (!$albumDropsPlaylist) {
+                $this->createAlbumDropsPlaylist();
             }
         }
 
@@ -64,13 +78,31 @@ class UpdateSettingsForm extends Component
 
         // Create the playlist
         $playlist = $api->createPlaylist([
-            'name' => 'Album Drop',
-            'description' => 'My Album Drop Playlist',
+            'name' => 'Mega Playlist by Album Drop',
+            'description' => 'My Album Drop Mega Playlist',
             'public' => false,
         ]);
 
         // Add the created playlist to the user's account
-        $user->spotify_playlist_id = $playlist->id;
+        $user->spotify_mega_playlist_id = $playlist->id;
+        $user->save();
+    }
+
+    public function createAlbumDropsPlaylist()
+    {
+        $user = auth()->user();
+
+        $api = $this->createSpotifySession($user);
+
+        // Create the playlist
+        $playlist = $api->createPlaylist([
+            'name' => 'New Releases by Album Drop',
+            'description' => 'My Album Drop New Releases Playlist',
+            'public' => false,
+        ]);
+
+        // Add the created playlist to the user's account
+        $user->spotify_new_releases_playlist_id = $playlist->id;
         $user->save();
     }
 }

@@ -14,7 +14,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 
-class UserPlaylistManagerJob implements ShouldQueue
+class UserMegaPlaylistManagerJob implements ShouldQueue
 {
     use SpotifyTrait;
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -39,13 +39,13 @@ class UserPlaylistManagerJob implements ShouldQueue
         // Get users that allow us to create a playlist for them and have a valid Spotify playlist id
         $users = User::query()
             ->with('artists')
-            ->where('create_playlist', true)
-            ->where('spotify_playlist_id', '!=', null)
+            ->where('create_mega_playlist', true)
+            ->where('spotify_mega_playlist_id', '!=', null)
             ->inRandomOrder()
             ->get();
 
         foreach ($users as $user) {
-            $playlistId = $user->spotify_playlist_id;
+            $playlistId = $user->spotify_mega_playlist_id;
 
             // Verify that the user's playlist still exists on Spotify
             $playlist = SpotifyFacade::playlist($playlistId)->get();
@@ -53,7 +53,8 @@ class UserPlaylistManagerJob implements ShouldQueue
             // If the user's playlist doesn't exist on Spotify, reset their create playlist setting to false
             // The user will need to turn it back on to create a new managed playlist
             if (!$playlist) {
-                $user->create_playlist = false;
+                $user->create_mega_playlist = false;
+                $user->spotify_mega_playlist_id = null;
                 $user->save();
                 continue;
             }

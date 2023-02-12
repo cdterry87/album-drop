@@ -26,6 +26,7 @@ return new class extends Migration
             $table->date('release_date');
             $table->string('url');
             $table->string('type');
+            $table->boolean('imported')->default(false);
             $table->timestamps();
         });
     }

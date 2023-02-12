@@ -72,7 +72,11 @@ class Header extends Component
 
     protected function syncArtistsFromSpotify($api, $user)
     {
-        $userFollowedArtists = $api->getUserFollowedArtists();
+        // @todo - Fix this logic so it syncs ALL user's artists, not just the first 50
+
+        $userFollowedArtists = $api->getUserFollowedArtists([
+            'limit' => 50
+        ]);
         if ($userFollowedArtists) {
             $artists = $userFollowedArtists->artists->items;
 

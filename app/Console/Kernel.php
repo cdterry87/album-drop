@@ -33,11 +33,11 @@ class Kernel extends ConsoleKernel
     {
         if (app()->environment('local')) {
             // Local testing (sail artisan schedule:work)
-            // $schedule->job(new UserMegaPlaylistManagerJob())->everyMinute();
-            // $schedule->job(new ArtistAlbumsJob())->everyMinute();
-            // $schedule->job(new ArtistAlbumTracksJob())->everyMinute();
-            // $schedule->job(new ArtistRelatedArtistJob())->everyMinute();
-            // $schedule->job(new UserAlbumDropMailJob())->everyMinute();
+            $schedule->job(new UserMegaPlaylistManagerJob())->everyMinute();
+            $schedule->job(new ArtistAlbumsJob())->everyMinute();
+            $schedule->job(new ArtistAlbumTracksJob())->everyMinute();
+            $schedule->job(new ArtistRelatedArtistJob())->everyMinute();
+            $schedule->job(new UserAlbumDropMailJob())->everyMinute();
             $schedule->job(new UserNewReleasesPlaylistManagerJob())->everyMinute();
         } else {
             // Manage Users' Mega Playlists

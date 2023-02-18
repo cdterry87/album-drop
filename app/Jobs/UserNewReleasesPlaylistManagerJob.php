@@ -120,7 +120,11 @@ class UserNewReleasesPlaylistManagerJob implements ShouldQueue
 
                     // Add the specified tracks
                     if (count($tracksToAdd) > 0) {
-                        $api->addPlaylistTracks($playlistId, $tracksToAdd);
+                        // Call addPlaylistTracks in increments of 100 to avoid hitting the Spotify API rate limit
+                        $chunks = array_chunk($tracksToAdd, 100);
+                        foreach ($chunks as $chunk) {
+                            $api->addPlaylistTracks($playlistId, $chunk);
+                        }
 
                         // Add the tracks to the user's playlist tracks table so we won't add them again
                         foreach ($tracksToAdd as $key => $trackId) {

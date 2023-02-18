@@ -62,7 +62,7 @@
         crossorigin
     >
     <link
-        href="https://fonts.googleapis.com/css2?family=Alata&family=Mulish:wght@200;400;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Alata&family=Audiowide:wght@200;400;800&display=swap"
         rel="stylesheet"
     >
     <!-- Scripts -->

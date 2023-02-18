@@ -66,7 +66,7 @@
         crossorigin
     >
     <link
-        href="https://fonts.googleapis.com/css2?family=Alata&family=Mulish:wght@200;400;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Alata&family=Audiowide:wght@200;400;800&display=swap"
         rel="stylesheet"
     >
 
@@ -103,7 +103,9 @@
             ></label>
             <div class="menu p-4 w-80 bg-base-300 text-base-content">
                 <a href="{{ route('home') }}">
-                    <h1 class="text-3xl font-bold">{{ env('APP_NAME') }}</h1>
+                    <h1 class="text-3xl font-bold font-title">
+                        {{ config('app.name') }}
+                    </h1>
                 </a>
                 <label
                     for="sidebar"

@@ -13,6 +13,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Alata', ...defaultTheme.fontFamily.sans],
+                title: ['Audiowide']
             },
             spacing: {
                 '100': '25rem',

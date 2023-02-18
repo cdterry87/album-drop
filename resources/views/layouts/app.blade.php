@@ -103,7 +103,8 @@
             ></label>
             <div class="menu p-4 w-80 bg-base-300 text-base-content">
                 <a href="{{ route('home') }}">
-                    <h1 class="text-3xl font-bold font-title">
+                    <h1
+                        class="text-3xl font-bold font-title hover:scale-110 hover:brightness-75 hover:translate-x-4 transition duration-300 ease-in-out">
                         {{ config('app.name') }}
                     </h1>
                 </a>

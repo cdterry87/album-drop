@@ -72,33 +72,59 @@ class Header extends Component
 
     protected function syncArtistsFromSpotify($api, $user)
     {
-        // @todo - Fix this logic so it syncs ALL user's artists, not just the first 50
+        // Keep track of the number of iterations we've made
+        $iterations = 0;
 
-        $userFollowedArtists = $api->getUserFollowedArtists([
-            'limit' => 50
-        ]);
-        if ($userFollowedArtists) {
-            $artists = $userFollowedArtists->artists->items;
+        // Keep track of the last artist retrieved from Spotify so it can be used to get the next page of artists
+        $lastArtistRetreivedId = null;
 
-            foreach ($artists as $artist) {
-                // If artist doesn't exist in the database, create it
-                $artistToTrack = Artist::firstOrCreate([
-                    'spotify_artist_id' => $artist->id,
-                ], [
-                    'name' => $artist->name,
-                    'url' => $artist->href,
-                    'image' => $artist->images[0]->url,
-                ]);
+        // Determines whether the user still has more artists to sync
+        $userHasFollowedArtists = true;
 
-                // If artist doesn't exist in the user's artists, create it
-                UserArtist::firstOrCreate([
-                    'user_id' => $user->id,
-                    'artist_id' => $artistToTrack->id,
-                ]);
+        while ($userHasFollowedArtists) {
+            // Get the user's followed artists from Spotify
+            $userFollowedArtists = $api->getUserFollowedArtists([
+                'limit' => 50,
+                'after' => $lastArtistRetreivedId,
+            ]);
+
+            if ($userFollowedArtists) {
+                // Get the artists from the response
+                $artists = $userFollowedArtists->artists->items;
+
+                foreach ($artists as $artist) {
+                    // If artist doesn't exist in the database, create it
+                    $artistToTrack = Artist::firstOrCreate([
+                        'spotify_artist_id' => $artist->id,
+                    ], [
+                        'name' => $artist->name,
+                        'url' => $artist->href,
+                        'image' => $artist->images[0]->url,
+                    ]);
+
+                    // If artist doesn't exist in the user's artists, create it
+                    UserArtist::firstOrCreate([
+                        'user_id' => $user->id,
+                        'artist_id' => $artistToTrack->id,
+                    ]);
+
+                    // Save the last artist id that was retrieved
+                    $lastArtistRetreivedId = $artist->id;
+                }
+
+                // Take a break in between requests to Spotify
+                sleep(2);
             }
 
-            return true;
+            // Increment counter
+            $iterations++;
+
+            // The system can only pull 50 at a time. If there are less than 50, we know we've reached the end.
+            // If we've gone through 100 iterations, we should stop to prevent an infinite loop.
+            if (count($artists) < 50 || $iterations  === 120) {
+                $userHasFollowedArtists = false;
+                return true;
+            }
         }
-        return false;
     }
 }

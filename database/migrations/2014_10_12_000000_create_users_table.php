@@ -36,6 +36,8 @@ return new class extends Migration
             $table->string('spotify_mega_playlist_id')->nullable();
             $table->boolean('create_new_releases_playlist')->default(false);
             $table->string('spotify_new_releases_playlist_id')->nullable();
+            $table->boolean('create_weekly_playlist')->default(false);
+            $table->string('spotify_weekly_playlist_id')->nullable();
             $table->timestamps();
         });
     }

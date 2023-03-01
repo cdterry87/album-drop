@@ -45,6 +45,18 @@
                     />
                 </div>
             </div>
+            <div class="flex items-center gap-2 col-span-6">
+                <x-jet-checkbox
+                    wire:model="create_weekly_playlist"
+                    id="create_weekly_playlist"
+                />
+                <div>
+                    <x-jet-label
+                        for="create_weekly_playlist"
+                        value="{{ __('I would like Album Drop to create a weekly playlist for me on Spotify consisting of random songs from my tracked artists.') }}"
+                    />
+                </div>
+            </div>
         @endif
     </x-slot>
 

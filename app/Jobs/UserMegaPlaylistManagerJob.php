@@ -69,6 +69,9 @@ class UserMegaPlaylistManagerJob implements ShouldQueue
                 ->whereIn('artist_id', $userArtistsIds)
                 ->whereNotIn('spotify_track_id', $user->playlistTracks->pluck('spotify_track_id'))
                 ->limit(100)
+                // Where name doesn't contain "Remix" or "Live"
+                ->whereRaw('LOWER(name) NOT LIKE "%remix%"')
+                ->whereRaw('LOWER(name) NOT LIKE "%live%"')
                 ->inRandomOrder()
                 ->pluck('spotify_track_id')
                 ->toArray();

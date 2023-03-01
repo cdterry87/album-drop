@@ -8,6 +8,7 @@ use App\Jobs\UserAlbumDropMailJob;
 use App\Jobs\ArtistRelatedArtistJob;
 use App\Jobs\UserMegaPlaylistManagerJob;
 use App\Jobs\UserNewReleasesPlaylistManagerJob;
+use App\Jobs\UserWeeklyPlaylistManagerJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -39,6 +40,7 @@ class Kernel extends ConsoleKernel
             $schedule->job(new ArtistRelatedArtistJob())->everyMinute();
             $schedule->job(new UserAlbumDropMailJob())->everyMinute();
             $schedule->job(new UserNewReleasesPlaylistManagerJob())->everyMinute();
+            $schedule->job(new UserWeeklyPlaylistManagerJob())->everyMinute();
         } else {
             // Manage Users' Mega Playlists
             $schedule->job(new UserMegaPlaylistManagerJob())->everyFourHours();
@@ -57,6 +59,9 @@ class Kernel extends ConsoleKernel
 
             // Manage Users' New Releases Playlists
             $schedule->job(new UserNewReleasesPlaylistManagerJob())->weeklyOn(6, '6:00');
+
+            // Manage Users' Weekly Playlists
+            $schedule->job(new UserWeeklyPlaylistManagerJob())->weeklyOn(1, '1:00');
         }
     }
 

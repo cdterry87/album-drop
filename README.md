@@ -3,7 +3,7 @@
 ## Installation
 
 -   Run git clone the project and cd into the directory
--   Run `cp .env.example .env` to create the .env file, then update the database variables like below
+-   Run `cp .env.example .env` to create the .env file, then update the DB, MAIL, and SPOTIFY variables like below
 
 ```
 DB_CONNECTION=mysql
@@ -12,11 +12,7 @@ DB_PORT=3306
 DB_DATABASE=albumdrop
 DB_USERNAME=sail
 DB_PASSWORD=password
-```
 
--   If you want the app to send emails, you also need to set the mail variables like below
-
-```
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.sendgrid.net
 MAIL_PORT=587
@@ -25,6 +21,10 @@ MAIL_PASSWORD=YOUR_SENDGRID_API_KEY_HERE
 MAIL_ENCRYPTION=tls
 MAIL_FROM_NAME="${APP_NAME}"
 MAIL_FROM_ADDRESS=YOUR_VERIFIED_SENDGRID_EMAIL_SENDER_ADDRESS
+
+SPOTIFY_CLIENT_ID=YOUR_SPOTIFY_CLIENT_ID
+SPOTIFY_CLIENT_SECRET=YOUR_SPOTIFY_CLIENT_SECRET
+SPOTIFY_REDIRECT_URI="http://localhost/auth/spotify/callback"
 ```
 
 -   Run the following command to install dependencies
@@ -42,4 +42,5 @@ docker run --rm \
 -   Run `sail npm install`
 -   Run `sail artisan key:generate`
 -   Run `sail artisan migrate:fresh --seed`
+-   Run `sail npm run dev` to build front end assets
 -   Go to localhost in your browser to view the app
